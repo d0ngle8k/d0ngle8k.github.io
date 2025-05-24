@@ -4,15 +4,24 @@ import react from '@vitejs/plugin-react';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: '/', // Changed from '/My-portfolio-website/' to '/' for d0ngle8k.github.io
+  base: '/',
   server: {
     port: 5173,
-    open: true, // Automatically open browser
-    host: true, // Listen on all addresses
+    open: true,
+    host: true,
   },
   build: {
     sourcemap: true,
     outDir: 'dist',
+    assetsDir: 'assets',
+    rollupOptions: {
+      output: {
+        manualChunks: undefined,
+        assetFileNames: 'assets/[name].[hash][extname]',
+        chunkFileNames: 'assets/[name].[hash].js',
+        entryFileNames: 'assets/[name].[hash].js',
+      },
+    },
   },
   optimizeDeps: {
     include: ['react', 'react-dom'],
