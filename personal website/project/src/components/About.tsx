@@ -29,57 +29,20 @@ const About: React.FC = () => {
   return (
     <section id="about" className="py-20 bg-slate-900">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
+        <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">About Me</h2>
-          <div className="w-20 h-1 bg-emerald-500 mx-auto"></div>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
-          <div className="lg:col-span-2">
-            <h3 className="text-2xl font-semibold text-white mb-6">My Background</h3>
-            <p className="text-gray-300 mb-6 leading-relaxed">
-              As a motivated 4th-year Computer Engineering student, I am deeply passionate about cybersecurity and eager to make a real-world impact. My journey has been shaped by hands-on experience in CTF competitions, security labs, and collaborative projects with peers.
+          <div className="w-20 h-1 bg-emerald-500 mx-auto mb-12"></div>
+          
+          <div className="max-w-3xl mx-auto">
+            <p className="text-gray-300 mb-8 leading-relaxed">
+              Every day, I immerse myself in the dynamic world of cybersecurity through hands-on practice and continuous learning. My daily routine includes solving complex challenges on LeetCode to sharpen my problem-solving skills, tackling real-world security scenarios on HackTheBox, and staying current with the latest vulnerabilities and exploits through active participation in cybersecurity forums.
             </p>
-            <p className="text-gray-300 mb-6 leading-relaxed">
-              I thrive on solving complex security challenges and am always seeking opportunities to apply my knowledge in practical settings. My foundation includes network security, ethical hacking, and secure coding practices, and I am committed to continuous learning through research and experimentation.
+            <p className="text-gray-300 mb-8 leading-relaxed">
+              Through platforms like HackTheBox, I've developed a deep understanding of penetration testing, vulnerability assessment, and exploit development. My regular engagement with the cybersecurity community has not only enhanced my technical skills but also kept me at the forefront of emerging security threats and defense strategies.
             </p>
             <p className="text-gray-300 leading-relaxed">
-              I am excited to contribute fresh perspectives and energy to a professional security team. My goal is to help build a safer digital world through ethical hacking, vulnerability research, and proactive defense—let's connect and make an impact together!
+              This daily commitment to practical learning and community engagement has transformed me into a proactive security professional. I'm constantly seeking new challenges and opportunities to apply my knowledge in real-world scenarios, whether it's through CTF competitions, security research, or collaborative projects. Let's connect and explore how my hands-on experience and continuous learning mindset can contribute to your security initiatives!
             </p>
-          </div>
-          
-          <div className="bg-slate-800 rounded-lg p-8 shadow-lg">
-            <h3 className="text-2xl font-semibold text-white mb-6">Contact Information</h3>
-            
-            <div className="space-y-4">
-              <div className="flex items-start">
-                <Mail className="h-5 w-5 text-emerald-500 mt-1 mr-3" />
-                <div>
-                  <p className="text-sm text-gray-400">Email</p>
-                  <a href={`mailto:${personalInfo.email}`} className="text-white hover:text-emerald-400 transition-colors">
-                    {personalInfo.email}
-                  </a>
-                </div>
-              </div>
-              
-              <div className="flex items-start">
-                <Phone className="h-5 w-5 text-emerald-500 mt-1 mr-3" />
-                <div>
-                  <p className="text-sm text-gray-400">Phone</p>
-                  <a href={`tel:${personalInfo.phone}`} className="text-white hover:text-emerald-400 transition-colors">
-                    {personalInfo.phone}
-                  </a>
-                </div>
-              </div>
-              
-              <div className="flex items-start">
-                <MapPin className="h-5 w-5 text-emerald-500 mt-1 mr-3" />
-                <div>
-                  <p className="text-sm text-gray-400">Location</p>
-                  <p className="text-white">{personalInfo.location}</p>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
 
