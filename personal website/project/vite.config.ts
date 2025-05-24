@@ -16,4 +16,5 @@ export default defineConfig({
     include: ['react', 'react-dom'],
     exclude: ['lucide-react'],
   },
+  base: '/My-portfolio-website/',
 });
