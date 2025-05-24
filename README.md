@@ -117,4 +117,4 @@ If you need to deploy manually:
 
 ---
 
-Built by ❤️ by Truong Gia Thanh
+Built by Bolt.new + Cursor.ai ❤️ by Truong Gia Thanh
