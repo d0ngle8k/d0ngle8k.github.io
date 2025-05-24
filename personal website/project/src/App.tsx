@@ -15,13 +15,18 @@ function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-slate-900 text-white">
-      <Navbar />
-      <Hero />
-      <About />
-      <Projects />
-      <Contact />
-      <Footer />
+    <div className="min-h-screen bg-slate-900 text-white antialiased">
+      <div className="relative">
+        <Header />
+        <main className="relative">
+          <Hero />
+          <About />
+          <TechStack />
+          <Certificates />
+          <Contact />
+        </main>
+        <Footer />
+      </div>
     </div>
   );
 }
