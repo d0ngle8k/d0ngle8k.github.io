@@ -117,4 +117,4 @@ If you need to deploy manually:
 
 ---
 
-Built with ❤️ by Truong Gia Thanh
+Built by ❤️ by Truong Gia Thanh
