@@ -10,9 +10,7 @@ const Hero: React.FC = () => {
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-3xl mx-auto">
-          <div className="inline-block p-2 bg-emerald-500/20 rounded-lg mb-6">
-            <Shield className="h-6 w-6 text-emerald-400" />
-          </div>
+          
           
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
             Building a Secure <span className="text-emerald-400">Future</span>

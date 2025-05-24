@@ -68,7 +68,7 @@ const TechStack: React.FC = () => {
               >
                 <div className="flex justify-between items-center mb-4">
                   <div className="flex items-center">
-                    {Icon && <Icon className="h-5 w-5 text-emerald-500 mr-3" />}
+                    {Icon && React.createElement(Icon as React.ElementType, { className: "h-5 w-5 text-emerald-500 mr-3" })}
                     <h3 className="font-semibold text-white">{skill.name}</h3>
                   </div>
                   <span className="text-sm text-emerald-400 font-mono">{skill.proficiency}%</span>

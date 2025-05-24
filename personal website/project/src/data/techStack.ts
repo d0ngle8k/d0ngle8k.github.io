@@ -45,6 +45,12 @@ export const techStack: Skill[] = [
     icon: 'Eye',
     category: 'defensive'
   },
+  {
+    name: 'Reverse Engineering',
+    proficiency: 20,
+    icon: 'Binary',
+    category: 'defensive'
+  },
   
   // Cloud Security
   {

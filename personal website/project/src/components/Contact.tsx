@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Send, Mail, Phone, MapPin, Linkedin, Github, Twitter, Facebook } from 'lucide-react';
+import { Send, Mail, Phone, MapPin, Linkedin, Github, Twitter, Facebook, Code } from 'lucide-react';
 import { personalInfo } from '../data/personalInfo';
 import emailjs from 'emailjs-com';
 
@@ -91,6 +91,32 @@ const Contact: React.FC = () => {
                   <div>
                     <p className="text-sm text-gray-400">Location</p>
                     <p className="text-white">{personalInfo.location}</p>
+                  </div>
+                </div>
+
+                {/* GitHub Link */}
+                <div className="flex items-start">
+                  <div className="bg-slate-800 p-3 rounded-lg mr-4">
+                    <Github className="h-6 w-6 text-emerald-500" />
+                  </div>
+                  <div>
+                    <p className="text-sm text-gray-400">GitHub</p>
+                    <a href="https://github.com/d0ngle8k" target="_blank" rel="noopener noreferrer" className="text-white hover:text-emerald-400 transition-colors">
+                      github.com/d0ngle8k
+                    </a>
+                  </div>
+                </div>
+
+                {/* LeetCode Link */}
+                <div className="flex items-start">
+                  <div className="bg-slate-800 p-3 rounded-lg mr-4">
+                    <Code className="h-6 w-6 text-emerald-500" />
+                  </div>
+                  <div>
+                    <p className="text-sm text-gray-400">LeetCode</p>
+                    <a href="https://leetcode.com/u/d0ngle8k/" target="_blank" rel="noopener noreferrer" className="text-white hover:text-emerald-400 transition-colors">
+                      leetcode.com/u/d0ngle8k
+                    </a>
                   </div>
                 </div>
               </div>

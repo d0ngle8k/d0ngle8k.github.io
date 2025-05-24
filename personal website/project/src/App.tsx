@@ -6,6 +6,7 @@ import TechStack from './components/TechStack';
 import Certificates from './components/Certificates';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import { Fade } from 'react-awesome-reveal';
 import './index.css';
 
 function App() {
@@ -20,10 +21,18 @@ function App() {
         <Header />
         <main className="relative">
           <Hero />
-          <About />
-          <TechStack />
-          <Certificates />
-          <Contact />
+          <Fade duration={2000}>
+            <About />
+          </Fade>
+          <Fade duration={2000}>
+            <TechStack />
+          </Fade>
+          <Fade duration={2000}>
+            <Certificates />
+          </Fade>
+          <Fade duration={2000}>
+            <Contact />
+          </Fade>
         </main>
         <Footer />
       </div>
