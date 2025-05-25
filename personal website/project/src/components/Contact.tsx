@@ -7,6 +7,7 @@ const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    phone: '',
     subject: '',
     message: '',
   });
@@ -32,7 +33,7 @@ const Contact: React.FC = () => {
       (result) => {
         setIsSubmitting(false);
         setSubmitted(true);
-        setFormData({ name: '', email: '', subject: '', message: '' });
+        setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
         setTimeout(() => setSubmitted(false), 5000);
       },
       (error) => {
@@ -119,6 +120,19 @@ const Contact: React.FC = () => {
                     </a>
                   </div>
                 </div>
+
+                {/* LinkedIn Link */}
+                <div className="flex items-start">
+                  <div className="bg-slate-800 p-3 rounded-lg mr-4">
+                    <Linkedin className="h-6 w-6 text-emerald-500" />
+                  </div>
+                  <div>
+                    <p className="text-sm text-gray-400">LinkedIn</p>
+                    <a href="https://www.linkedin.com/in/d0ngle8k/" target="_blank" rel="noopener noreferrer" className="text-white hover:text-emerald-400 transition-colors">
+                      linkedin.com/in/d0ngle8k
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -161,6 +175,20 @@ const Contact: React.FC = () => {
                         placeholder="john@example.com"
                       />
                     </div>
+                  </div>
+
+                  {/* Phone Number Field */}
+                  <div className="mb-6">
+                    <label htmlFor="phone" className="block text-sm text-gray-400 mb-2">Your Phone Number (Optional)</label>
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      className="w-full bg-slate-800 border border-slate-700 text-white rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                      placeholder="+1 234 567 8901"
+                    />
                   </div>
                   
                   <div className="mb-6">
