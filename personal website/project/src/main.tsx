@@ -2,6 +2,7 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App';
 import './index.css';
+import { ThemeProvider } from './context/ThemeContext';
 import emailjs from 'emailjs-com';
 
 // Add error handling
@@ -16,7 +17,9 @@ try {
   const root = createRoot(rootElement);
   root.render(
     <StrictMode>
-      <App />
+      <ThemeProvider>
+        <App />
+      </ThemeProvider>
     </StrictMode>
   );
   console.log('Application rendered successfully');

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { ArrowRight, Linkedin, Github, Twitter, Shield, Facebook } from 'lucide-react';
 import { personalInfo } from '../data/personalInfo';
 import MatrixBackground from './MatrixBackground';
+import { useTheme } from '../context/ThemeContext';
 
 const Hero: React.FC = () => {
   const fullTitle = "Building a Secure Future";
@@ -9,6 +10,7 @@ const Hero: React.FC = () => {
   const [displayedTitle, setDisplayedTitle] = useState('');
 
   const isMounted = useRef(true);
+  const { isDarkGreen } = useTheme();
 
   useEffect(() => {
     isMounted.current = true;
@@ -56,7 +58,11 @@ const Hero: React.FC = () => {
         <div className="max-w-3xl mx-auto">
 
 
-          <h1 className={`text-4xl md:text-5xl lg:text-6xl font-bold mb-6 ${displayedTitle.length > 0 ? 'text-emerald-400' : 'text-white'}`}>
+          <h1 className={`text-4xl md:text-5xl lg:text-6xl font-bold mb-6 ${
+            displayedTitle.length > 0 
+              ? (isDarkGreen ? 'text-emerald-700' : 'text-emerald-500') 
+              : 'text-white'
+          }`}>
             {displayedTitle}
           </h1>
 

@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { Mail, Phone, MapPin, Shield, Server, Cloud, Code } from 'lucide-react';
 import { personalInfo } from '../data/personalInfo';
+import { useTheme } from '../context/ThemeContext';
 
 const About: React.FC = () => {
+  const { isDarkGreen } = useTheme();
   const specializations = [
     {
       title: 'Offensive Security',
@@ -27,7 +29,7 @@ const About: React.FC = () => {
   ];
 
   return (
-    <section id="about" className="py-20 bg-slate-900">
+    <section id="about" className={`py-20 transition-colors duration-300 ${isDarkGreen ? 'bg-black' : 'bg-slate-900'}`}>
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">About Me</h2>

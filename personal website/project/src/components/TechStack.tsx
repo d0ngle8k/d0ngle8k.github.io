@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { techStack } from '../data/techStack';
 import * as LucideIcons from 'lucide-react';
+import { useTheme } from '../context/ThemeContext';
 
 const TechStack: React.FC = () => {
   const [filter, setFilter] = useState<string | null>(null);
+  const { isDarkGreen } = useTheme();
   
   const categories = [
     { id: 'offensive', name: 'Offensive Security' },
@@ -18,7 +20,7 @@ const TechStack: React.FC = () => {
     : techStack;
     
   return (
-    <section id="tech-stack" className="py-20 bg-slate-800">
+    <section id="tech-stack" className={`py-20 transition-colors duration-300 ${isDarkGreen ? 'bg-black' : 'bg-slate-800'}`}>
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Technical Skills</h2>

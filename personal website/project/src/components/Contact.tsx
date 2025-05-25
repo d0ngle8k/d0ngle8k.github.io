@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Send, Mail, Phone, MapPin, Linkedin, Github, Twitter, Facebook, Code } from 'lucide-react';
 import { personalInfo } from '../data/personalInfo';
 import emailjs from 'emailjs-com';
+import { useTheme } from '../context/ThemeContext';
 
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -11,6 +12,7 @@ const Contact: React.FC = () => {
     subject: '',
     message: '',
   });
+  const { isDarkGreen } = useTheme();
   
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -44,7 +46,7 @@ const Contact: React.FC = () => {
   };
   
   return (
-    <section id="contact" className="py-20 bg-slate-800">
+    <section id="contact" className={`py-20 transition-colors duration-300 ${isDarkGreen ? 'bg-black' : 'bg-slate-800'}`}>
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Get In Touch</h2>

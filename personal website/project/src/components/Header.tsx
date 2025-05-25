@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Shield, Download } from 'lucide-react';
+import { Menu, X, Shield, Download, Palette } from 'lucide-react';
 import { personalInfo } from '../data/personalInfo';
+import { useTheme } from '../context/ThemeContext';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { isDarkGreen, toggleBackground } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -30,9 +32,7 @@ const Header: React.FC = () => {
   return (
     <header 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled 
-          ? 'bg-slate-900/95 backdrop-blur-sm shadow-lg' 
-          : 'bg-transparent'
+        scrolled ? 'header-scrolled' : 'bg-transparent'
       }`}
     >
       <div className="container mx-auto px-4 py-4">
@@ -53,6 +53,13 @@ const Header: React.FC = () => {
                 {item.name}
               </a>
             ))}
+            <button
+              onClick={toggleBackground}
+              className="p-2 rounded-full hover:bg-slate-800/50 dark-green-bg:hover:bg-black/50 transition-colors"
+              aria-label="Toggle background"
+            >
+              <Palette className={`w-5 h-5 ${isDarkGreen ? 'text-emerald-400' : 'text-gray-300'}`} />
+            </button>
             {personalInfo.resumeUrl !== '#' && (
               <a
                 href={personalInfo.resumeUrl}
@@ -66,43 +73,46 @@ const Header: React.FC = () => {
           </nav>
 
           {/* Mobile Menu Button */}
-          <button
-            className="md:hidden text-white focus:outline-none"
-            onClick={toggleMenu}
-          >
-            {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </button>
+          <div className="flex items-center space-x-4 md:hidden">
+            <button
+              onClick={toggleBackground}
+              className="p-2 rounded-full hover:bg-slate-800/50 dark-green-bg:hover:bg-black/50 transition-colors"
+              aria-label="Toggle background"
+            >
+              <Palette className={`w-5 h-5 ${isDarkGreen ? 'text-emerald-400' : 'text-gray-300'}`} />
+            </button>
+            <button
+              className="text-white focus:outline-none"
+              onClick={toggleMenu}
+            >
+              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <nav className="md:hidden mt-4 py-4 border-t border-gray-700/50">
-            <ul className="space-y-4">
-              {navItems.map((item) => (
-                <li key={item.name}>
-                  <a
-                    href={item.href}
-                    className="block text-gray-300 hover:text-emerald-400 transition-colors"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {item.name}
-                  </a>
-                </li>
-              ))}
-              {personalInfo.resumeUrl !== '#' && (
-                <li>
-                  <a
-                    href={personalInfo.resumeUrl}
-                    className="flex items-center justify-center px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-md transition-colors w-full"
-                    download
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    <Download className="w-4 h-4 mr-2" />
-                    Resume
-                  </a>
-                </li>
-              )}
-            </ul>
+          <nav className="md:hidden mt-4 py-4 border-t border-slate-800">
+            {navItems.map((item) => (
+              <a
+                key={item.name}
+                href={item.href}
+                className="block py-2 text-gray-300 hover:text-emerald-400 transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {item.name}
+              </a>
+            ))}
+            {personalInfo.resumeUrl !== '#' && (
+              <a
+                href={personalInfo.resumeUrl}
+                className="flex items-center mt-4 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-md transition-colors"
+                download
+              >
+                <Download className="w-4 h-4 mr-2" />
+                Resume
+              </a>
+            )}
           </nav>
         )}
       </div>

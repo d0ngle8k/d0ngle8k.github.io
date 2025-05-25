@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
 import { certificates } from '../data/certificates';
 import { Award, Calendar, ExternalLink } from 'lucide-react';
+import { useTheme } from '../context/ThemeContext';
 
 const Certificates: React.FC = () => {
   const [selectedCert, setSelectedCert] = useState<number | null>(null);
+  const { isDarkGreen } = useTheme();
   
   const handleCertClick = (id: number) => {
     setSelectedCert(selectedCert === id ? null : id);
   };
   
   return (
-    <section id="certificates" className="py-20 bg-slate-900">
+    <section id="certificates" className={`py-20 transition-colors duration-300 ${isDarkGreen ? 'bg-black' : 'bg-slate-900'}`}>
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Certifications</h2>

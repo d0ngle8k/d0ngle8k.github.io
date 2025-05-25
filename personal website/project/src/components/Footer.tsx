@@ -1,12 +1,14 @@
 import React from 'react';
 import { Shield } from 'lucide-react';
 import { personalInfo } from '../data/personalInfo';
+import { useTheme } from '../context/ThemeContext';
 
 const Footer: React.FC = () => {
+  const { isDarkGreen } = useTheme();
   const currentYear = new Date().getFullYear();
   
   return (
-    <footer className="bg-slate-900 border-t border-slate-800">
+    <footer className={`transition-colors duration-300 ${isDarkGreen ? 'bg-black' : 'bg-slate-900'} border-t border-slate-800`}>
       <div className="container mx-auto px-4 py-10">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="flex items-center mb-6 md:mb-0">
