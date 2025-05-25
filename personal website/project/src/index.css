@@ -39,12 +39,42 @@
 
   /* Update background for scrolled header */
   .header-scrolled {
-    @apply bg-slate-900/95 backdrop-blur-sm shadow-lg;
+    background-color: rgba(15, 23, 42, 0.95); /* slate-900 with 95% opacity */
+    -webkit-backdrop-filter: blur(sm);
+    backdrop-filter: blur(sm);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   }
 
   body.dark-green-bg .header-scrolled {
-    @apply bg-black/95 backdrop-blur-sm shadow-lg;
+    background-color: rgba(0, 0, 0, 0.95); /* black with 95% opacity */
+    -webkit-backdrop-filter: blur(sm);
+    backdrop-filter: blur(sm);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   }
+
+  /* Button color changes in dark theme */
+  body.dark-green-bg button,
+  body.dark-green-bg a.bg-emerald-600,
+  body.dark-green-bg a.bg-gray-800,
+  body.dark-green-bg .bg-slate-700 {
+    @apply bg-emerald-800;
+  }
+
+  body.dark-green-bg button:hover,
+  body.dark-green-bg a.bg-emerald-600:hover,
+  body.dark-green-bg a.bg-gray-800:hover,
+  body.dark-green-bg .bg-slate-700:hover {
+    @apply bg-emerald-900;
+  }
+
+  /* Keep specific elements their original color or adjust as needed */
+   body.dark-green-bg .bg-slate-900\/80 {
+    background-color: rgba(30, 41, 59, 0.8); /* slate-800 with 80% opacity */
+   }
+
+   body.dark-green-bg .bg-slate-900 {
+    @apply bg-slate-800;
+   }
 }
 
 /* Custom animation for fade in */
