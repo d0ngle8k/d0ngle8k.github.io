@@ -1,29 +1,73 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ArrowRight, Linkedin, Github, Twitter, Shield, Facebook } from 'lucide-react';
 import { personalInfo } from '../data/personalInfo';
 import MatrixBackground from './MatrixBackground';
 
 const Hero: React.FC = () => {
+  const fullTitle = "Building a Secure Future";
+
+  const [displayedTitle, setDisplayedTitle] = useState('');
+
+  const isMounted = useRef(true);
+
+  useEffect(() => {
+    isMounted.current = true;
+    let index = 0;
+    let isDeleting = false;
+
+    const type = () => {
+      if (!isMounted.current) return;
+
+      const currentText = fullTitle;
+
+      const textToDisplay = isDeleting ? currentText.slice(0, index--) : currentText.slice(0, index++);
+      setDisplayedTitle(textToDisplay);
+
+      let delay = 0;
+      if (!isDeleting && index > currentText.length) {
+        // Text is fully typed, now pause for 2 seconds
+        isDeleting = true;
+        delay = 2000; // 2 second pause
+      } else if (isDeleting && index < 0) {
+        // Text is fully deleted, pause before typing again
+        isDeleting = false;
+        index = 0;
+        delay = 500; // Pause before starting to type again
+      } else {
+        // Typing or deleting
+        delay = isDeleting ? 150 : 50; // Slow deleting (150ms), Fast typing (50ms)
+      }
+
+      setTimeout(type, delay);
+    };
+
+    type();
+
+    return () => {
+      isMounted.current = false; // Cleanup on unmount
+    };
+  }, []); // Empty dependency array means this effect runs once on mount
+
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center pt-20 pb-20">
       <MatrixBackground />
-      
+
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-3xl mx-auto">
-          
-          
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
-            Building a Secure <span className="text-emerald-400">Future</span>
+
+
+          <h1 className={`text-4xl md:text-5xl lg:text-6xl font-bold mb-6 ${displayedTitle.length > 0 ? 'text-emerald-400' : 'text-white'}`}>
+            {displayedTitle}
           </h1>
-          
+
           <h2 className="text-xl md:text-2xl text-gray-300 mb-8 font-light">
             {personalInfo.title}
           </h2>
-          
+
           <p className="text-gray-400 text-lg mb-10 max-w-2xl leading-relaxed">
             {personalInfo.bio}
           </p>
-          
+
           <div className="flex flex-wrap gap-4 mb-12">
             <a 
               href="#contact" 
