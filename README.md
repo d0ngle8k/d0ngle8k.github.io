@@ -89,7 +89,7 @@ For any inquiries or suggestions, please feel free to reach out through my portf
 
 This project is automatically deployed to GitHub Pages using GitHub Actions. The deployment process is triggered on every push to the main branch.
 
-Your portfolio will be available at: `https://d0ngle8k.github.io/My-portfolio-website/`
+Your portfolio will be available at: `https://d0ngle8k.github.io`
 
 To manually trigger a deployment:
 1. Go to your repository on GitHub
