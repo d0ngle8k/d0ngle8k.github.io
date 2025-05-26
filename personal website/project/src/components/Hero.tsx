@@ -7,7 +7,7 @@ import { useTheme } from '../context/ThemeContext';
 const Hero: React.FC = () => {
   const fullTitle = "Building a Secure Future";
 
-  const [displayedTitle, setDisplayedTitle] = useState('');
+  const [displayedTitle, setDisplayedTitle] = useState(''); // Start with an empty string
 
   const isMounted = useRef(true);
   const { isDarkGreen } = useTheme();
@@ -37,7 +37,7 @@ const Hero: React.FC = () => {
         delay = 500; // Pause before starting to type again
       } else {
         // Typing or deleting
-        delay = isDeleting ? 150 : 50; // Slow deleting (150ms), Fast typing (50ms)
+        delay = isDeleting ? 100 : 50; // Deleting is slightly faster than typing
       }
 
       setTimeout(type, delay);
@@ -48,7 +48,7 @@ const Hero: React.FC = () => {
     return () => {
       isMounted.current = false; // Cleanup on unmount
     };
-  }, []); // Empty dependency array means this effect runs once on mount
+  }, [fullTitle]); // Add fullTitle as a dependency
 
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center pt-20 pb-20">
@@ -58,26 +58,22 @@ const Hero: React.FC = () => {
         <div className="max-w-3xl mx-auto">
 
 
-          <h1 className={`text-4xl md:text-5xl lg:text-6xl font-bold mb-6 ${
-            displayedTitle.length > 0 
-              ? (isDarkGreen ? 'text-emerald-700' : 'text-emerald-500') 
-              : 'text-white'
-          }`}>
+          <h1 className={`text-4xl md:text-5xl lg:text-6xl font-bold mb-6 ${isDarkGreen ? 'text-emerald-700' : 'text-emerald-500'}`}>
             {displayedTitle}
           </h1>
 
-          <h2 className="text-xl md:text-2xl text-gray-300 mb-8 font-light">
+          <h2 className={`text-xl md:text-2xl mb-8 font-light transition-colors duration-300 ${isDarkGreen ? 'text-emerald-400' : 'text-gray-300'}`}>
             {personalInfo.title}
           </h2>
 
-          <p className="text-gray-400 text-lg mb-10 max-w-2xl leading-relaxed">
+          <p className={`text-lg mb-10 max-w-2xl leading-relaxed transition-colors duration-300 ${isDarkGreen ? 'text-emerald-400' : 'text-gray-400'}`}>
             {personalInfo.bio}
           </p>
 
           <div className="flex flex-wrap gap-4 mb-12">
             <a 
               href="#contact" 
-              className="px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-md transition-all duration-300 flex items-center group"
+              className={`px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-md transition-all duration-300 flex items-center group`}
             >
               Let's Connect
               <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />

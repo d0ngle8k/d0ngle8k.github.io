@@ -3,6 +3,7 @@ import { Send, Mail, Phone, MapPin, Linkedin, Github, Twitter, Facebook, Code } 
 import { personalInfo } from '../data/personalInfo';
 import emailjs from 'emailjs-com';
 import { useTheme } from '../context/ThemeContext';
+import AnimatedTitle from './AnimatedTitle';
 
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -49,9 +50,9 @@ const Contact: React.FC = () => {
     <section id="contact" className={`py-20 transition-colors duration-300 ${isDarkGreen ? 'bg-black' : 'bg-slate-800'}`}>
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Get In Touch</h2>
+          <AnimatedTitle title="Get In Touch" level="h2" disableAnimation={true} />
           <div className="w-20 h-1 bg-emerald-500 mx-auto mb-6"></div>
-          <p className="text-gray-300 max-w-2xl mx-auto">
+          <p className={`max-w-2xl mx-auto ${isDarkGreen ? 'text-white' : 'text-gray-300'}`}>
             Have a project in mind or want to discuss cybersecurity solutions? 
             I'm always open to new opportunities and challenges.
           </p>

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { certificates } from '../data/certificates';
 import { Award, Calendar, ExternalLink } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
+import AnimatedTitle from './AnimatedTitle';
 
 const Certificates: React.FC = () => {
   const [selectedCert, setSelectedCert] = useState<number | null>(null);
@@ -15,9 +16,9 @@ const Certificates: React.FC = () => {
     <section id="certificates" className={`py-20 transition-colors duration-300 ${isDarkGreen ? 'bg-black' : 'bg-slate-900'}`}>
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Certifications</h2>
+          <AnimatedTitle title="Certifications" level="h2" disableAnimation={true} />
           <div className="w-20 h-1 bg-emerald-500 mx-auto mb-6"></div>
-          <p className="text-gray-300 max-w-2xl mx-auto">
+          <p className={`max-w-2xl mx-auto ${isDarkGreen ? 'text-white' : 'text-gray-300'}`}>
             Professional certifications that validate my expertise and commitment to the cybersecurity field.
           </p>
         </div>
@@ -58,7 +59,7 @@ const Certificates: React.FC = () => {
                 
                 {selectedCert === cert.id && (
                   <div className="mt-3 pt-3 border-t border-slate-700 animate-fadeIn">
-                    <p className="text-gray-300 text-sm mb-4">{cert.description}</p>
+                    <p className={`text-sm mb-4 ${isDarkGreen ? 'text-white' : 'text-gray-300'}`}>{cert.description}</p>
                     
                     <div className="mb-4">
                       <h4 className="text-sm text-gray-400 mb-2">Key Skills:</h4>

@@ -1,0 +1,335 @@
+:root {
+  --chat-bg-color: white;
+  --chat-header-bg: #0f172a;
+  --chat-header-text: white;
+  --chat-message-user-bg: #0f172a;
+  --chat-message-user-text: white;
+  --chat-message-assistant-bg: #f1f5f9;
+  --chat-message-assistant-text: #0f172a;
+  --chat-input-border: #e2e8f0;
+  --chat-input-text: #0f172a;
+  --chat-send-button-bg: #0f172a;
+  --chat-send-button-text: white;
+  --chat-send-button-hover-bg: #1e293b;
+  --chat-typing-indicator: #94a3b8;
+  --chat-error-bg: #fee2e2;
+  --chat-error-text: #dc2626;
+  --chat-error-border: #fecaca;
+}
+
+body.dark-green-bg {
+  --chat-bg-color: #1a1a1a; /* Dark background */
+  --chat-header-bg: #0a0a0a; /* Even darker header */
+  --chat-header-text: #00ff00; /* Neon green */
+  --chat-message-user-bg: #2d2d2d; /* Dark gray for user messages */
+  --chat-message-user-text: #00ff00; /* Neon green */
+  --chat-message-assistant-bg: #1a1a1a; /* Very dark gray for assistant (same as window) */
+  --chat-message-assistant-text: #00cc00; /* Slightly lighter green */
+  --chat-input-border: #006600; /* Green border */
+  --chat-input-text: #00ff00; /* Neon green */
+  --chat-send-button-bg: #008000; /* Green send button */
+  --chat-send-button-text: white; 
+  --chat-send-button-hover-bg: #009900; /* Lighter green on hover */
+  --chat-typing-indicator: #00b300; /* Green typing indicator */
+  --chat-error-bg: #4d0000; /* Dark red for errors */
+  --chat-error-text: #ff0000; /* Bright red */
+  --chat-error-border: #b30000; /* Darker red border */
+}
+
+.chatbot-container {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 1000;
+}
+
+.chatbot-button {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: var(--chat-header-bg);
+  color: var(--chat-header-text);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.chatbot-button:hover {
+  transform: scale(1.05);
+}
+
+.chatbot-button.hidden {
+  opacity: 0;
+  transform: scale(0.8);
+  pointer-events: none; /* Prevent interaction when hidden */
+}
+
+.chatbot-window {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 350px;
+  height: 500px;
+  background-color: var(--chat-bg-color);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  opacity: 0;
+  transform: scale(0.95);
+  pointer-events: none; /* Prevent interaction when hidden */
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.chatbot-window.open {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto; /* Allow interaction when open */
+}
+
+.chatbot-header {
+  padding: 1rem;
+  background-color: var(--chat-header-bg);
+  color: var(--chat-header-text);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chatbot-header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  color: var(--chat-header-text);
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  line-height: 1;
+}
+
+.messages-container {
+  flex: 1;
+  padding: 1rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.message {
+  max-width: 80%;
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.user-message {
+  background-color: var(--chat-message-user-bg);
+  color: var(--chat-message-user-text);
+  align-self: flex-end;
+  border-bottom-right-radius: 4px;
+}
+
+.assistant-message {
+  background-color: var(--chat-message-assistant-bg);
+  color: var(--chat-message-assistant-text);
+  align-self: flex-start;
+  border-bottom-left-radius: 4px;
+}
+
+.assistant-message.loading {
+  /* Keep default styling for loading */
+}
+
+.assistant-message.error {
+  background-color: var(--chat-error-bg);
+  color: var(--chat-error-text);
+  border: 1px solid var(--chat-error-border);
+}
+
+.input-container {
+  padding: 1rem;
+  border-top: 1px solid var(--chat-input-border);
+  display: flex;
+  gap: 0.5rem;
+}
+
+.input-container input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--chat-input-border);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s ease;
+  color: var(--chat-input-text);
+  background-color: var(--chat-bg-color); /* Match input background to chat window */
+}
+
+.input-container input::placeholder {
+    color: var(--chat-typing-indicator); /* Style placeholder */
+}
+
+.input-container input:focus {
+  border-color: var(--chat-input-border);
+}
+
+.input-container button {
+  background-color: var(--chat-send-button-bg);
+  color: var(--chat-send-button-text);
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease;
+}
+
+.input-container button:hover:not(:disabled) {
+  background-color: var(--chat-send-button-hover-bg);
+}
+
+.input-container button:disabled {
+  background-color: var(--chat-typing-indicator);
+  cursor: not-allowed;
+}
+
+.typing-indicator {
+  display: flex;
+  gap: 0.25rem;
+  padding: 0.5rem;
+}
+
+.typing-indicator span {
+  width: 8px;
+  height: 8px;
+  background-color: var(--chat-typing-indicator);
+  border-radius: 50%;
+  animation: typing 1s infinite ease-in-out;
+}
+
+.typing-indicator span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-indicator span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes typing {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@media (max-width: 640px) {
+  .chatbot-window {
+    width: calc(100% - 2rem);
+    height: calc(100% - 4rem);
+    bottom: 1rem;
+    right: 1rem;
+    transform: scale(0.98); /* Adjust initial scale for mobile */
+  }
+  
+  .chatbot-window.open {
+     transform: scale(1); /* Reset scale for mobile when open */
+  }
+
+  .chatbot-button {
+    width: 50px;
+    height: 50px;
+    bottom: 1rem;
+    right: 1rem;
+  }
+} 
+
+/* Dark green theme specific styles */
+body.dark-green-bg .chatbot-button {
+  background-color: var(--chat-header-bg);
+  color: var(--chat-header-text);
+}
+
+body.dark-green-bg .chatbot-window {
+  background-color: var(--chat-bg-color);
+  box-shadow: 0 8px 24px rgba(0, 255, 0, 0.15); /* Green shadow */
+}
+
+body.dark-green-bg .chatbot-header {
+  background-color: var(--chat-header-bg);
+  color: var(--chat-header-text);
+}
+
+body.dark-green-bg .close-button {
+  color: var(--chat-header-text);
+}
+
+body.dark-green-bg .messages-container {
+  /* No specific background needed, inherits from window */
+}
+
+body.dark-green-bg .user-message {
+  background-color: var(--chat-message-user-bg);
+  color: var(--chat-message-user-text);
+}
+
+body.dark-green-bg .assistant-message {
+  background-color: var(--chat-message-assistant-bg);
+  color: var(--chat-message-assistant-text);
+}
+
+body.dark-green-bg .assistant-message.error {
+  background-color: var(--chat-error-bg);
+  color: var(--chat-error-text);
+  border: 1px solid var(--chat-error-border);
+}
+
+body.dark-green-bg .input-container {
+  border-top: 1px solid var(--chat-input-border);
+}
+
+body.dark-green-bg .input-container input {
+  border-color: var(--chat-input-border);
+  color: var(--chat-input-text);
+  background-color: var(--chat-bg-color);
+}
+
+body.dark-green-bg .input-container input:focus {
+  border-color: var(--chat-input-border);
+}
+
+body.dark-green-bg .input-container input::placeholder {
+    color: var(--chat-typing-indicator); /* Style placeholder */
+}
+
+body.dark-green-bg .input-container button {
+  background-color: var(--chat-send-button-bg);
+  color: var(--chat-send-button-text);
+}
+
+body.dark-green-bg .input-container button:hover:not(:disabled) {
+  background-color: var(--chat-send-button-hover-bg);
+}
+
+body.dark-green-bg .input-container button:disabled {
+  background-color: var(--chat-typing-indicator);
+}
+
+body.dark-green-bg .typing-indicator span {
+  background-color: var(--chat-typing-indicator);
+} 

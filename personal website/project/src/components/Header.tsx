@@ -92,12 +92,12 @@ const Header: React.FC = () => {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <nav className="md:hidden mt-4 py-4 border-t border-slate-800">
-            {navItems.map((item) => (
+          <nav className="md:hidden mt-4 py-4 border-t border-slate-800 transition-all duration-500 ease-out">
+            {navItems.map((item, index) => (
               <a
                 key={item.name}
                 href={item.href}
-                className="block py-2 text-gray-300 hover:text-emerald-400 transition-colors"
+                className={`block py-2 text-gray-300 hover:text-emerald-400 transition-colors transform translate-y-2 opacity-0 ${isMenuOpen ? 'translate-y-0 opacity-100' : ''} transition-all duration-300 ease-out delay-${index * 75}`}
                 onClick={() => setIsMenuOpen(false)}
               >
                 {item.name}

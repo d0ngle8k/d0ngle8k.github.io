@@ -7,6 +7,7 @@ import Certificates from './components/Certificates';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import CursorSnake from './components/CursorSnake';
+import Chatbot from './components/Chatbot';
 import { Fade } from 'react-awesome-reveal';
 import { useTheme } from './context/ThemeContext';
 import './index.css';
@@ -42,6 +43,7 @@ function App() {
           </Fade>
         </main>
         <Footer />
+        <Chatbot />
       </div>
     </div>
   );

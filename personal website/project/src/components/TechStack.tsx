@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { techStack } from '../data/techStack';
 import * as LucideIcons from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
+import AnimatedTitle from './AnimatedTitle';
 
 const TechStack: React.FC = () => {
   const [filter, setFilter] = useState<string | null>(null);
@@ -23,9 +24,9 @@ const TechStack: React.FC = () => {
     <section id="tech-stack" className={`py-20 transition-colors duration-300 ${isDarkGreen ? 'bg-black' : 'bg-slate-800'}`}>
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Technical Skills</h2>
+          <AnimatedTitle title="Technical Skills" level="h2" disableAnimation={true} />
           <div className="w-20 h-1 bg-emerald-500 mx-auto mb-6"></div>
-          <p className="text-gray-300 max-w-2xl mx-auto">
+          <p className={`max-w-2xl mx-auto ${isDarkGreen ? 'text-white' : 'text-gray-300'}`}>
             My technical expertise spans across various domains of cybersecurity, 
             from offensive security to cloud infrastructure protection.
           </p>
