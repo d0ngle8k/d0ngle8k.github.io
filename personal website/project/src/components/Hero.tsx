@@ -66,7 +66,7 @@ const Hero: React.FC = () => {
             {personalInfo.title}
           </h2>
 
-          <p className={`text-lg mb-10 max-w-2xl leading-relaxed transition-colors duration-300 ${isDarkGreen ? 'text-emerald-400' : 'text-gray-400'}`}>
+          <p className={`text-lg mb-10 max-w-2xl leading-relaxed transition-colors duration-300 ${isDarkGreen ? 'text-emerald-500' : 'text-gray-400'}`}>
             {personalInfo.bio}
           </p>
 

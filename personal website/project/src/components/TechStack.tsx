@@ -26,7 +26,7 @@ const TechStack: React.FC = () => {
         <div className="text-center mb-16">
           <AnimatedTitle title="Technical Skills" level="h2" disableAnimation={true} />
           <div className="w-20 h-1 bg-emerald-500 mx-auto mb-6"></div>
-          <p className={`max-w-2xl mx-auto ${isDarkGreen ? 'text-white' : 'text-gray-300'}`}>
+          <p className={`max-w-2xl mx-auto ${isDarkGreen ? 'text-emerald-500' : 'text-gray-300'}`}>
             My technical expertise spans across various domains of cybersecurity, 
             from offensive security to cloud infrastructure protection.
           </p>

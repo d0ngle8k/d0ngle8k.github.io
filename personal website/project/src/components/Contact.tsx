@@ -52,7 +52,7 @@ const Contact: React.FC = () => {
         <div className="text-center mb-16">
           <AnimatedTitle title="Get In Touch" level="h2" disableAnimation={true} />
           <div className="w-20 h-1 bg-emerald-500 mx-auto mb-6"></div>
-          <p className={`max-w-2xl mx-auto ${isDarkGreen ? 'text-white' : 'text-gray-300'}`}>
+          <p className={`max-w-2xl mx-auto ${isDarkGreen ? 'text-emerald-500' : 'text-gray-300'}`}>
             Have a project in mind or want to discuss cybersecurity solutions? 
             I'm always open to new opportunities and challenges.
           </p>
