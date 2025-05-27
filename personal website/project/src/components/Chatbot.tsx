@@ -7,7 +7,7 @@ interface Message {
 }
 
 const API_BASE_URL = import.meta.env.PROD
-  ? 'https://d0ngle8k.github.io/api' // Replace with your actual domain
+  ? 'https://chatbot-backend-lsz30erxg-doggugs-projects.vercel.app/api' // Use your Vercel backend URL
   : 'http://localhost:3001/api';
 
 const Chatbot = () => {
