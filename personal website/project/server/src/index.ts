@@ -22,7 +22,7 @@ app.use(cors({
     'https://d0ngle8k.github.io',
     'http://localhost:5173'
   ],
-  methods: ['POST'],
+  methods: ['POST', 'OPTIONS'],
   credentials: true,
 }));
 app.use(express.json());
