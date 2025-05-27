@@ -6,7 +6,7 @@ interface Message {
   content: string;
 }
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+const API_BASE_URL = (import.meta.env.VITE_API_URL || 'http://localhost:3001') + '/api';
 
 const Chatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
