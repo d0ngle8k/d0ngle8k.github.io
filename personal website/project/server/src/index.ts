@@ -18,9 +18,10 @@ const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
 // Middleware
 app.use(cors({
-  origin: process.env.NODE_ENV === 'production' 
-    ? 'https://d0ngle8k.github.io' // Replace with your actual domain
-    : ['http://localhost:5173', 'http://localhost:5174', 'http://192.168.1.212:5174', 'http://192.168.1.5:5173'], // Allow multiple ports and local network IPs in dev
+  origin: [
+    'https://d0ngle8k.github.io',
+    'http://localhost:5173'
+  ],
   methods: ['POST'],
   credentials: true,
 }));
