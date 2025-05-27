@@ -6,7 +6,7 @@ interface Message {
   content: string;
 }
 
-const API_BASE_URL = import.meta.env.VITE_API_URL + '/api';
+const API_BASE_URL = 'https://d0ngle8k-github-io.onrender.com/api';
 
 const Chatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
