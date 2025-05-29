@@ -119,3 +119,10 @@
 #root {
   @apply relative min-h-screen;
 }
+
+/* Show cursor on mobile devices */
+@media (max-width: 767px) {
+  html, body, * {
+    cursor: auto !important;
+  }
+}

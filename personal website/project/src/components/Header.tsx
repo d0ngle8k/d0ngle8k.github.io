@@ -27,6 +27,8 @@ const Header: React.FC = () => {
     { name: 'Tech Stack', href: '#tech-stack' },
     { name: 'Certificates', href: '#certificates' },
     { name: 'Contact', href: '#contact' },
+    { name: 'Playground', href: '#playground' },
+    { name: 'Blog', href: '#blog' },
   ];
 
   return (
@@ -91,30 +93,35 @@ const Header: React.FC = () => {
         </div>
 
         {/* Mobile Navigation */}
-        {isMenuOpen && (
-          <nav className="md:hidden mt-4 py-4 border-t border-slate-800 transition-all duration-500 ease-out">
-            {navItems.map((item, index) => (
-              <a
-                key={item.name}
-                href={item.href}
-                className={`block py-2 text-gray-300 hover:text-emerald-400 transition-colors transform translate-y-2 opacity-0 ${isMenuOpen ? 'translate-y-0 opacity-100' : ''} transition-all duration-300 ease-out delay-${index * 75}`}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {item.name}
-              </a>
-            ))}
-            {personalInfo.resumeUrl !== '#' && (
-              <a
-                href={personalInfo.resumeUrl}
-                className="flex items-center mt-4 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-md transition-colors"
-                download
-              >
-                <Download className="w-4 h-4 mr-2" />
-                Resume
-              </a>
-            )}
-          </nav>
-        )}
+        <nav
+          className={`md:hidden mt-4 border-t border-slate-800 overflow-hidden transition-all duration-500 ease-in-out
+            ${isMenuOpen ? 'max-h-[500px] opacity-100 translate-y-0 py-4 pointer-events-auto' : 'max-h-0 opacity-0 -translate-y-2 py-0 pointer-events-none'}`}
+          style={{ transitionProperty: 'max-height, opacity, transform, padding' }}
+        >
+          {navItems.map((item, index) => (
+            <a
+              key={item.name}
+              href={item.href}
+              className={`block py-2 text-gray-300 hover:text-emerald-400 transition-colors transform
+                ${isMenuOpen ? 'translate-y-0 opacity-100' : 'translate-y-2 opacity-0'}
+                transition-all duration-300 ease-out delay-${isMenuOpen ? index * 75 : 0}`}
+              onClick={() => setIsMenuOpen(false)}
+              style={{ display: 'block' }}
+            >
+              {item.name}
+            </a>
+          ))}
+          {personalInfo.resumeUrl !== '#' && (
+            <a
+              href={personalInfo.resumeUrl}
+              className="flex items-center mt-4 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-md transition-colors"
+              download
+            >
+              <Download className="w-4 h-4 mr-2" />
+              Resume
+            </a>
+          )}
+        </nav>
       </div>
     </header>
   );
