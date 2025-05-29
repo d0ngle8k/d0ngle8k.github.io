@@ -8468,4 +8468,4 @@ Error generating stack: `+i.message+`
     animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);
   }
 `;function VP(){const{isDarkGreen:e}=v1();return TL.useEffect(()=>{document.title="Truong Gia Thanh | Cybersecurity Professional"},[]),s.jsxs("div",{className:`min-h-screen text-white antialiased transition-colors duration-300 ${e?"bg-black":"bg-slate-900"}`,children:[s.jsx(WH,{}),s.jsxs("div",{className:"relative",children:[s.jsx(PH,{}),s.jsxs("main",{className:"relative",children:[s.jsx(FH,{}),s.jsx(Fn,{duration:2e3,children:s.jsx(TH,{})}),s.jsx(Fn,{duration:2e3,children:s.jsx(DH,{})}),s.jsx(Fn,{duration:2e3,children:s.jsx(RH,{})}),s.jsx(Fn,{duration:2e3,children:s.jsx(_H,{})})]}),s.jsx($H,{}),s.jsx(GH,{})]})]})}const Yb=document.getElementById("root");if(!Yb)throw new Error("Failed to find the root element");console.log("Starting application...");try{gb(Yb).render(s.jsx(I.StrictMode,{children:s.jsx(AH,{children:s.jsx(VP,{})})})),console.log("Application rendered successfully")}catch(e){console.error("Failed to render application:",e)}
-//# sourceMappingURL=index.BzNUpL8N.js.map
+//# sourceMappingURL=index.COoMBnzZ.js.map
