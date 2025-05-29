@@ -27,7 +27,7 @@ const Header: React.FC = () => {
     { name: 'Tech Stack', href: '#tech-stack' },
     { name: 'Certificates', href: '#certificates' },
     { name: 'Contact', href: '#contact' },
-    { name: 'Playground', href: '#playground' },
+    { name: 'Playground', href: 'https://rebornxp.onrender.com/', external: true },
     { name: 'Blog', href: '#blog' },
   ];
 
@@ -47,13 +47,25 @@ const Header: React.FC = () => {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                className="text-gray-300 hover:text-emerald-400 transition-colors"
-              >
-                {item.name}
-              </a>
+              item.external ? (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  className="text-gray-300 hover:text-emerald-400 transition-colors"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {item.name}
+                </a>
+              ) : (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  className="text-gray-300 hover:text-emerald-400 transition-colors"
+                >
+                  {item.name}
+                </a>
+              )
             ))}
             <button
               onClick={toggleBackground}
@@ -99,17 +111,33 @@ const Header: React.FC = () => {
           style={{ transitionProperty: 'max-height, opacity, transform, padding' }}
         >
           {navItems.map((item, index) => (
-            <a
-              key={item.name}
-              href={item.href}
-              className={`block py-2 text-gray-300 hover:text-emerald-400 transition-colors transform
-                ${isMenuOpen ? 'translate-y-0 opacity-100' : 'translate-y-2 opacity-0'}
-                transition-all duration-300 ease-out delay-${isMenuOpen ? index * 75 : 0}`}
-              onClick={() => setIsMenuOpen(false)}
-              style={{ display: 'block' }}
-            >
-              {item.name}
-            </a>
+            item.external ? (
+              <a
+                key={item.name}
+                href={item.href}
+                className={`block py-2 text-gray-300 hover:text-emerald-400 transition-colors transform
+                  ${isMenuOpen ? 'translate-y-0 opacity-100' : 'translate-y-2 opacity-0'}
+                  transition-all duration-300 ease-out delay-${isMenuOpen ? index * 75 : 0}`}
+                onClick={() => setIsMenuOpen(false)}
+                style={{ display: 'block' }}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {item.name}
+              </a>
+            ) : (
+              <a
+                key={item.name}
+                href={item.href}
+                className={`block py-2 text-gray-300 hover:text-emerald-400 transition-colors transform
+                  ${isMenuOpen ? 'translate-y-0 opacity-100' : 'translate-y-2 opacity-0'}
+                  transition-all duration-300 ease-out delay-${isMenuOpen ? index * 75 : 0}`}
+                onClick={() => setIsMenuOpen(false)}
+                style={{ display: 'block' }}
+              >
+                {item.name}
+              </a>
+            )
           ))}
           {personalInfo.resumeUrl !== '#' && (
             <a
