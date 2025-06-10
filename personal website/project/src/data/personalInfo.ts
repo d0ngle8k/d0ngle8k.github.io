@@ -28,5 +28,5 @@ export const personalInfo: PersonalInfo = {
     twitter: "https://twitter.com/d0ngle8k",
     facebook: "https://www.facebook.com/GiaThanh683/",
   },
-  resumeUrl: "#"
+  resumeUrl: "/d0ngle8k CV.pdf"
 };
