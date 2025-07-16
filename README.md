@@ -107,4 +107,3 @@ To manually trigger a deployment:
 
 ---
 
-Built with ❤️ by Truong Gia Thanh using Bolt.new + Cursor.ai
