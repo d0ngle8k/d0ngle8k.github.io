@@ -11,7 +11,7 @@ export function MobileNav({ links }: Props) {
   const closeMenu = () => setIsOpen(false);
 
   return (
-    <div className="md:hidden">
+    <div className="md:hidden relative">
       {/* Hamburger Button */}
       <button
         onClick={toggleMenu}
@@ -20,7 +20,7 @@ export function MobileNav({ links }: Props) {
         aria-expanded={isOpen}
       >
         <svg
-          className="w-5 h-5"
+          className={`w-5 h-5 transition-transform duration-300 ${isOpen ? 'rotate-90' : ''}`}
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -43,23 +43,27 @@ export function MobileNav({ links }: Props) {
         </svg>
       </button>
 
-      {/* Dropdown Menu */}
-      {isOpen && (
-        <div className="absolute top-full left-0 right-0 bg-surface/95 backdrop-blur border-b border-white/10 shadow-lg md:hidden">
-          <nav className="mx-auto max-w-6xl px-4 py-4 space-y-3">
-            {links.map(({ href, label }) => (
-              <a
-                key={href}
-                href={href}
-                onClick={closeMenu}
-                className="block px-3 py-2 rounded-lg text-sm font-medium text-primary hover:bg-white/10 transition-colors"
-              >
-                {label}
-              </a>
-            ))}
-          </nav>
-        </div>
-      )}
+      {/* Dropdown Menu with smooth animation */}
+      <div
+        className={`absolute top-full right-0 mt-2 w-48 bg-surface/95 backdrop-blur border border-white/10 rounded-lg shadow-lg overflow-hidden transition-all duration-300 origin-top-right ${
+          isOpen
+            ? 'opacity-100 scale-100 visible'
+            : 'opacity-0 scale-95 invisible'
+        }`}
+      >
+        <nav className="px-2 py-3 space-y-1">
+          {links.map(({ href, label }) => (
+            <a
+              key={href}
+              href={href}
+              onClick={closeMenu}
+              className="block px-4 py-3 rounded-lg text-sm font-medium text-primary hover:bg-white/10 transition-colors"
+            >
+              {label}
+            </a>
+          ))}
+        </nav>
+      </div>
     </div>
   );
 }
