@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import { ThemeSwitcher } from '../components/ThemeSwitcher';
+import { MobileNav } from '../components/MobileNav';
 import { Starfield } from '../components/Starfield';
 import { ViewTransitions } from 'astro:transitions';
 
@@ -54,7 +55,7 @@ const navLinks = [
             ))}
           </ul>
           
-          <!-- Right Side: Search & Theme -->
+          <!-- Right Side: Search, Theme & Mobile Menu -->
           <div class="flex items-center gap-2 lg:gap-3 flex-shrink-0">
             <form action="/search" class="hidden items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-sm text-secondary focus-within:border-white/30 lg:flex">
               <span aria-hidden="true">🔍</span>
@@ -73,6 +74,7 @@ const navLinks = [
               🔍
             </a>
             <ThemeSwitcher client:load />
+            <MobileNav client:load links={navLinks} />
           </div>
         </div>
       </nav>
