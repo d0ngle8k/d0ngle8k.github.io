@@ -8,6 +8,13 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    slug: 'data-center-vsphere-esxi',
+    title: 'Data Center: vSphere and EXSI',
+    date: '2025-12-15',
+    tags: ['vmware', 'virtualization', 'data-center', 'infrastructure', 'vsphere', 'esxi'],
+    summary: 'Enterprise data center infrastructure built on VMware vSphere and ESXi for virtual machine management and orchestration.'
+  },
+  {
     slug: 'reinforcement-learning-mario-project',
     title: 'Reinforcement Learning Mario Project',
     date: '2025-12-15',

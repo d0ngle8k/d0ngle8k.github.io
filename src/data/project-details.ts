@@ -1,4 +1,17 @@
 export const projectDetails = {
+  'data-center-vsphere-esxi': {
+    description: "Enterprise-grade data center infrastructure leveraging VMware vSphere and ESXi hypervisor technology. This project demonstrates advanced virtualization capabilities, resource management, and high-availability configurations for enterprise computing environments.",
+    details: [
+      "Deployed ESXi hypervisors for bare-metal virtualization",
+      "Configured vSphere vCenter for centralized VM management",
+      "Implemented resource pools and DRS for load balancing",
+      "Set up High Availability (HA) and fault tolerance mechanisms",
+      "Managed storage with vSAN and network configuration with vSwitches"
+    ],
+    technologies: ["VMware vSphere", "ESXi", "vCenter", "Virtualization", "Data Center Management", "vSAN"],
+    github: "https://github.com/d0ngle8k/Data-Center-vSphere-ESXI"
+  },
+
   'reinforcement-learning-mario-project': {
     description: "A deep reinforcement learning project that trains an AI agent to master Super Mario Bros levels autonomously. The agent uses convolutional neural networks to process game frames and learns optimal strategies through policy gradient methods.",
     details: [
