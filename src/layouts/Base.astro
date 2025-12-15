@@ -5,6 +5,14 @@ import { Starfield } from '../components/Starfield';
 import { ViewTransitions } from 'astro:transitions';
 
 const { title = 'Portfolio', description = 'Portfolio website' } = Astro.props;
+
+const navLinks = [
+  { href: '/', label: 'Home' },
+  { href: '/work', label: 'Work' },
+  { href: '/blog', label: 'Blog' },
+  { href: '/projects', label: 'Projects' },
+  { href: '/playground', label: 'Playground' }
+];
 ---
 <!DOCTYPE html>
 <html lang="en" class="dark">
@@ -32,12 +40,14 @@ const { title = 'Portfolio', description = 'Portfolio website' } = Astro.props;
           <span class="h-8 w-8 rounded-full bg-white/10 inline-flex items-center justify-center">T</span>
           <span>Truong Gia Thanh</span>
         </div>
-        <ul class="flex items-center gap-4 text-sm">
-          <li><a href="/" class="hover:text-white">Home</a></li>
-          <li><a href="/work" class="hover:text-white">Work</a></li>
-          <li><a href="/blog" class="hover:text-white">Blog</a></li>
-          <li><a href="/projects" class="hover:text-white">Projects</a></li>
-          <li><a href="/playground" class="hover:text-white">Playground</a></li>
+        <ul class="flex flex-wrap items-center gap-4 text-sm">
+          {navLinks.map(({ href, label }) => (
+            <li>
+              <a href={href} class="hover:text-white" aria-label={label}>
+                {label}
+              </a>
+            </li>
+          ))}
         </ul>
         <div class="flex items-center gap-3">
           <form action="/search" class="hidden items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-sm text-secondary focus-within:border-white/30 md:flex">
