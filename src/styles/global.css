@@ -105,10 +105,16 @@ body {
   @apply text-primary min-h-screen antialiased;
   background-color: transparent; /* Let starfield show through */
   transition: background-color 0.5s ease, color 0.5s ease;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Ensure proper touch behavior on mobile */
+  -webkit-touch-callout: none;
 }
 
 a {
   @apply text-primary hover:text-white transition-colors;
+  /* Prevent zoom on double tap on iOS */
+  touch-action: manipulation;
 }
 
 html.light a:hover {
@@ -121,11 +127,17 @@ html.light a:hover {
 }
 
 .btn-primary {
-  @apply inline-flex items-center justify-center px-4 py-2 rounded-full bg-white text-black font-semibold shadow hover:-translate-y-0.5 transition;
+  @apply inline-flex items-center justify-center px-4 py-2 rounded-full bg-white text-black font-semibold shadow hover:-translate-y-0.5 transition touch-manipulation;
+  /* Prevent text selection on mobile */
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .btn-ghost {
-  @apply inline-flex items-center justify-center px-4 py-2 rounded-full border border-white/20 text-white hover:bg-white/10 transition;
+  @apply inline-flex items-center justify-center px-4 py-2 rounded-full border border-white/20 text-white hover:bg-white/10 transition touch-manipulation;
+  /* Prevent text selection on mobile */
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 @keyframes spin-slow {

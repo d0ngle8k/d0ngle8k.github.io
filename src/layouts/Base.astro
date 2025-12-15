@@ -35,34 +35,34 @@ const navLinks = [
       <Starfield client:load />
     </div>
     <header class="sticky top-0 z-20 backdrop-blur bg-surface/80 border-b border-white/5">
-      <nav class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <div class="flex items-center gap-2 font-bold tracking-tight">
-          <span class="h-8 w-8 rounded-full bg-white/10 inline-flex items-center justify-center">T</span>
-          <span>Truong Gia Thanh</span>
+      <nav class="mx-auto flex max-w-6xl items-center justify-between px-4 sm:px-6 py-3 sm:py-4 gap-2">
+        <div class="flex items-center gap-2 font-bold tracking-tight min-w-0">
+          <span class="h-6 w-6 sm:h-8 sm:w-8 rounded-full bg-white/10 inline-flex items-center justify-center flex-shrink-0 text-xs sm:text-base">T</span>
+          <span class="text-xs sm:text-base truncate">Truong Gia Thanh</span>
         </div>
-        <ul class="flex flex-wrap items-center gap-4 text-sm">
+        <ul class="hidden md:flex flex-wrap items-center gap-2 lg:gap-4 text-xs lg:text-sm">
           {navLinks.map(({ href, label }) => (
             <li>
-              <a href={href} class="hover:text-white" aria-label={label}>
+              <a href={href} class="hover:text-white transition-colors" aria-label={label}>
                 {label}
               </a>
             </li>
           ))}
         </ul>
-        <div class="flex items-center gap-3">
-          <form action="/search" class="hidden items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-sm text-secondary focus-within:border-white/30 md:flex">
+        <div class="flex items-center gap-2 lg:gap-3 ml-auto">
+          <form action="/search" class="hidden items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-sm text-secondary focus-within:border-white/30 lg:flex">
             <span aria-hidden="true">🔍</span>
             <input
               name="q"
               type="search"
               placeholder="Search"
-              class="w-36 bg-transparent text-primary placeholder:text-secondary focus:outline-none"
+              class="w-24 lg:w-36 bg-transparent text-primary placeholder:text-secondary focus:outline-none text-xs lg:text-sm"
             />
           </form>
           <a
             href="/search"
             aria-label="Search"
-            class="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-lg md:hidden"
+            class="inline-flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-base sm:text-lg lg:hidden transition-all hover:bg-white/10"
           >
             🔍
           </a>
@@ -76,12 +76,12 @@ const navLinks = [
     </main>
 
     <footer class="border-t border-white/5 bg-card/60 backdrop-blur">
-      <div class="mx-auto flex max-w-6xl flex-col gap-4 px-6 py-8 md:flex-row md:items-center md:justify-between text-sm text-secondary">
+      <div class="mx-auto flex max-w-6xl flex-col gap-4 px-4 sm:px-6 py-6 sm:py-8 md:flex-row md:items-center md:justify-between text-xs sm:text-sm text-secondary">
         <div class="flex items-center gap-2">
-          <span class="h-8 w-8 rounded-full bg-white/10 inline-flex items-center justify-center">T</span>
-          <div>
-            <div class="font-semibold text-primary">Truong Gia Thanh</div>
-            <div>One system at a time</div>
+          <span class="h-6 w-6 sm:h-8 sm:w-8 rounded-full bg-white/10 inline-flex items-center justify-center flex-shrink-0 text-xs sm:text-base">T</span>
+          <div class="min-w-0">
+            <div class="font-semibold text-primary text-xs sm:text-sm">Truong Gia Thanh</div>
+            <div class="text-xs sm:text-sm">One system at a time</div>
           </div>
         </div>
         <div class="flex gap-4 text-secondary">

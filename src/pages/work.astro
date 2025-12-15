@@ -3,23 +3,24 @@ import Base from '../layouts/Base.astro';
 import { workHistory } from '../data/work';
 ---
 <Base title="Work | Truong Gia Thanh">
-  <section class="mx-auto max-w-5xl px-6 py-16 space-y-10">
+  <section class="mx-auto max-w-5xl px-4 sm:px-6 py-12 sm:py-16 space-y-10">
     <div>
-      <p class="text-xs uppercase tracking-[0.3em] text-secondary">Work</p>
-      <h1 class="text-3xl font-bold">Experience</h1>
+      <p class="text-xs sm:text-sm uppercase tracking-[0.3em] text-secondary">Work</p>
+      <h1 class="text-2xl sm:text-3xl font-bold">Experience</h1>
     </div>
 
-    <div class="space-y-6">
+    <div class="space-y-4 sm:space-y-6">
       {workHistory.map((job) => (
-        <article class="card p-6 space-y-3" key={`${job.role}-${job.company}`}>
-          <div class="flex flex-wrap items-center gap-3 text-sm text-secondary">
-            <span class="rounded-full bg-white/10 px-3 py-1 text-primary font-semibold">{job.role}</span>
+        <article class="card p-4 sm:p-6 space-y-3" key={`${job.role}-${job.company}`}>
+          <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 text-xs sm:text-sm text-secondary">
+            <span class="rounded-full bg-white/10 px-3 py-1 text-primary font-semibold whitespace-nowrap">{job.role}</span>
+            <span class="hidden sm:block">•</span>
             <span>{job.company}</span>
-            <span>•</span>
+            <span class="hidden sm:block">•</span>
             <span>{job.start} — {job.end ?? 'Present'}</span>
           </div>
-          <p class="text-secondary">{job.summary}</p>
-          <ul class="list-disc space-y-2 pl-5 text-secondary text-sm">
+          <p class="text-secondary text-sm sm:text-base">{job.summary}</p>
+          <ul class="list-disc space-y-1 sm:space-y-2 pl-5 text-secondary text-xs sm:text-sm">
             {job.bullets.map((item) => (
               <li key={item}>{item}</li>
             ))}

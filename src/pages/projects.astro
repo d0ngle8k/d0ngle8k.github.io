@@ -4,10 +4,10 @@ import { ProjectsFilters } from '../components/ProjectsFilters';
 import { projects } from '../data/projects';
 ---
 <Base title="Projects | Truong Gia Thanh">
-  <section class="mx-auto max-w-6xl px-6 py-16 space-y-8">
+  <section class="mx-auto max-w-6xl px-4 sm:px-6 py-12 sm:py-16 space-y-8">
     <div class="space-y-2">
-      <p class="text-xs uppercase tracking-[0.3em] text-secondary">Projects</p>
-      <h1 class="text-3xl font-bold">Selected work</h1>
+      <p class="text-xs sm:text-sm uppercase tracking-[0.3em] text-secondary">Projects</p>
+      <h1 class="text-2xl sm:text-3xl font-bold">Selected work</h1>
     </div>
     <ProjectsFilters client:load projects={projects} />
   </section>
