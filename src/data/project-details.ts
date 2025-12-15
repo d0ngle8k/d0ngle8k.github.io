@@ -74,7 +74,7 @@ export const projectDetails = {
       "Demonstrates Java best practices and clean code principles"
     ],
     technologies: ["Java", "Algorithms", "Data Structures", "Problem Solving"],
-    github: "https://github.com/d0ngle8k/LeetCode-Solutions"
+    github: "https://github.com/d0ngle8k/LeetCode"
   },
 
   'blockchain-from-scratch': {
@@ -87,7 +87,7 @@ export const projectDetails = {
       "Demonstrates blockchain fundamentals through clean Ruby code"
     ],
     technologies: ["Ruby", "Cryptography", "Blockchain", "Hashing Algorithms"],
-    github: "https://github.com/d0ngle8k/Blockchain-from-Scratch"
+    github: "https://github.com/d0ngle8k/Blockchain-demo"
   },
 
   'simple-ransomware': {
