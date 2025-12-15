@@ -1,0 +1,18 @@
+---
+import Base from '../layouts/Base.astro';
+import { ArcadeIntro } from '../components/ArcadeIntro';
+---
+<Base title="Playground | Truong Gia Thanh" description="Interactive games and experiments">
+  <section class="mx-auto max-w-5xl px-6 py-16 space-y-8">
+    <div class="space-y-2">
+      <h1 class="text-3xl font-bold">Playground</h1>
+      <p class="text-secondary">
+        Interactive games and experiments. Test your skills and have fun!
+      </p>
+    </div>
+
+    <div class="card p-6 space-y-4">
+      <ArcadeIntro client:load />
+    </div>
+  </section>
+</Base>

@@ -24,6 +24,8 @@ export function ArcadeIntro() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const animationRef = useRef<number | null>(null);
   const velocityRef = useRef({ x: 0, y: 0 });
+  const lastFrameTimeRef = useRef<number>(0);
+  const scoreIntervalRef = useRef<number | null>(null);
   const [running, setRunning] = useState(false);
   const [timeLeft, setTimeLeft] = useState(DURATION_SECONDS);
   const [score, setScore] = useState(0);
@@ -111,6 +113,10 @@ export function ArcadeIntro() {
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
       }
+      if (scoreIntervalRef.current) {
+        clearInterval(scoreIntervalRef.current);
+        scoreIntervalRef.current = null;
+      }
     };
   }, [running]);
 
@@ -132,6 +138,10 @@ export function ArcadeIntro() {
   const checkTracking = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!running || !isMouseDown) {
       setIsTracking(false);
+      if (scoreIntervalRef.current) {
+        clearInterval(scoreIntervalRef.current);
+        scoreIntervalRef.current = null;
+      }
       return;
     }
 
@@ -149,15 +159,21 @@ export function ArcadeIntro() {
       setHitFrames((f) => f + 1);
       if (!isTracking) {
         setIsTracking(true);
-        trackingRef.current = window.setTimeout(() => {
-          setScore((s) => s + 1);
-          if (audioRef.current) (audioRef.current as any).play();
-        }, TRACK_THRESHOLD_MS);
+        if (audioRef.current) (audioRef.current as any).play();
+        
+        // Start continuous scoring: 1ms = 1 point
+        lastFrameTimeRef.current = Date.now();
+        scoreIntervalRef.current = window.setInterval(() => {
+          const now = Date.now();
+          const elapsed = now - lastFrameTimeRef.current;
+          lastFrameTimeRef.current = now;
+          setScore((s) => s + elapsed);
+        }, 16); // Update every ~16ms (60fps)
       }
     } else {
-      if (trackingRef.current) {
-        clearTimeout(trackingRef.current);
-        trackingRef.current = null;
+      if (scoreIntervalRef.current) {
+        clearInterval(scoreIntervalRef.current);
+        scoreIntervalRef.current = null;
       }
       setIsTracking(false);
     }
@@ -169,9 +185,9 @@ export function ArcadeIntro() {
 
   const handleMouseUp = () => {
     setIsMouseDown(false);
-    if (trackingRef.current) {
-      clearTimeout(trackingRef.current);
-      trackingRef.current = null;
+    if (scoreIntervalRef.current) {
+      clearInterval(scoreIntervalRef.current);
+      scoreIntervalRef.current = null;
     }
     setIsTracking(false);
   };
@@ -205,6 +221,10 @@ export function ArcadeIntro() {
       title: 'Game Over!',
       width: 'min(520px, 92vw)',
       padding: '0',
+      position: 'center',
+      customClass: {
+        popup: 'swal-centered-popup'
+      },
       html: `
         <div style="padding: 20px; background: #0f1117; color: #e5e7eb; text-align: left;">
           <div style="background: linear-gradient(135deg, #0b1424, #0f1b2f); border: 1px solid #1f2937; border-radius: 12px; padding: 16px; margin-bottom: 18px; box-shadow: 0 12px 30px rgba(0,0,0,0.35);">
@@ -224,7 +244,7 @@ export function ArcadeIntro() {
 
           <div style="display: grid; gap: 12px;">
             <input id="swal-name" class="swal2-input" placeholder="Your Name" required style="border-radius: 10px; background: #111827; border: 1px solid #1f2937; color: #e5e7eb;" />
-            <input id="swal-age" type="number" class="swal2-input" placeholder="Your Age" required style="border-radius: 10px; background: #111827; border: 1px solid #1f2937; color: #e5e7eb;" />
+            <input id="swal-age" type="number" min="1" max="150" class="swal2-input" placeholder="Your Age" required style="border-radius: 10px; background: #111827; border: 1px solid #1f2937; color: #e5e7eb;" />
             <input id="swal-phone" class="swal2-input" placeholder="Your Phone" required style="border-radius: 10px; background: #111827; border: 1px solid #1f2937; color: #e5e7eb;" />
             <input id="swal-email" type="email" class="swal2-input" placeholder="Your Email" required style="border-radius: 10px; background: #111827; border: 1px solid #1f2937; color: #e5e7eb;" />
           </div>
@@ -272,7 +292,15 @@ export function ArcadeIntro() {
   const sendEmail = async (userData: any, score: number, accuracy: string) => {
     try {
       const templateParams = {
-        to_email: 'your-email@gmail.com', // Replace with your Gmail
+        // Common contact-style fields used by default EmailJS templates
+        to_email: 'trggiathanh2003@gmail.com', // Replace with your Gmail in EmailJS template
+        email: userData.email,
+        name: userData.name,
+        phone: userData.phone,
+        subject: `Aim Trainer Results - ${userData.name}`,
+        message: `Score: ${score}\nAccuracy: ${accuracy}%\nDifficulty: ${difficulty}\nAge: ${userData.age}\nEmail: ${userData.email}\nPhone: ${userData.phone}\nTimestamp: ${new Date().toLocaleString()}`,
+
+        // Detailed fields for custom templates
         player_name: userData.name,
         player_age: userData.age,
         player_phone: userData.phone,
