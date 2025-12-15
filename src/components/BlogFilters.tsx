@@ -49,30 +49,35 @@ export function BlogFilters({ posts }: Props) {
         </div>
         <div className="space-y-4">
           {visible.map((post, index) => (
-            <article 
-              key={post.slug} 
-              className="card p-4 transition-all duration-300 hover:border-white/30 hover:shadow-lg hover:-translate-y-1 cursor-pointer group"
-              style={{
-                animation: `fadeInUp 0.4s ease-out ${index * 0.08}s both`
-              }}
+            <a 
+              href={`/blog/${post.slug}`}
+              key={post.slug}
+              className="block"
             >
-              <div className="text-xs text-secondary">{new Date(post.date).toDateString()}</div>
-              <div className="flex items-center justify-between gap-4">
-                <h3 className="text-lg font-semibold group-hover:text-white transition-colors">{post.title}</h3>
-                <span className="text-secondary group-hover:translate-x-1 transition-transform">→</span>
-              </div>
-              <p className="text-secondary text-sm">{post.excerpt}</p>
-              <div className="mt-2 flex flex-wrap gap-2 text-[11px] text-secondary">
-                {post.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="rounded-full border border-white/10 bg-white/5 px-2 py-1"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </article>
+              <article 
+                className="card p-4 transition-all duration-300 hover:border-white/30 hover:shadow-lg hover:-translate-y-1 cursor-pointer group"
+                style={{
+                  animation: `fadeInUp 0.4s ease-out ${index * 0.08}s both`
+                }}
+              >
+                <div className="text-xs text-secondary">{new Date(post.date).toDateString()}</div>
+                <div className="flex items-center justify-between gap-4">
+                  <h3 className="text-lg font-semibold group-hover:text-white transition-colors">{post.title}</h3>
+                  <span className="text-secondary group-hover:translate-x-1 transition-transform">→</span>
+                </div>
+                <p className="text-secondary text-sm">{post.excerpt}</p>
+                <div className="mt-2 flex flex-wrap gap-2 text-[11px] text-secondary">
+                  {post.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="rounded-full border border-white/10 bg-white/5 px-2 py-1"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </article>
+            </a>
           ))}
         </div>
         <style>{`

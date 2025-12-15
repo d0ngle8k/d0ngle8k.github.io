@@ -1,0 +1,60 @@
+---
+import Base from '../../layouts/Base.astro';
+import { posts } from '../../data/posts';
+import { blogDetails } from '../../data/blog-details';
+
+export async function getStaticPaths() {
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { slug } = Astro.params;
+const post = posts.find((p) => p.slug === slug);
+const detail = blogDetails[slug as keyof typeof blogDetails];
+
+if (!post || !detail) {
+  return new Response('Post not found', { status: 404 });
+}
+---
+
+<Base title={post.title}>
+  <article class="mx-auto max-w-3xl px-6 py-16 space-y-8">
+    <div class="space-y-4">
+      <p class="text-xs uppercase tracking-[0.3em] text-secondary">{post.date}</p>
+      <h1 class="text-4xl font-bold">{post.title}</h1>
+      <div class="flex flex-wrap gap-2">
+        {post.tags.map((tag) => (
+          <span class="text-xs px-3 py-1 rounded-full border border-white/10 bg-white/5 text-secondary">
+            {tag}
+          </span>
+        ))}
+      </div>
+    </div>
+
+    <div class="prose prose-invert max-w-none space-y-6">
+      {detail.sections.map((section) => (
+        <div class="space-y-3">
+          <h2 class="text-2xl font-semibold">{section.title}</h2>
+          {section.content.map((paragraph) => (
+            <p class="text-secondary leading-relaxed">{paragraph}</p>
+          ))}
+        </div>
+      ))}
+    </div>
+
+    <div class="pt-8 border-t border-white/10">
+      <a href="/blog" class="text-secondary hover:text-white transition">
+        ← Back to blog
+      </a>
+    </div>
+  </article>
+</Base>
+
+<style>
+  .prose-invert p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+</style>
