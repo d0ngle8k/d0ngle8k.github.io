@@ -35,38 +35,45 @@ const navLinks = [
       <Starfield client:load />
     </div>
     <header class="sticky top-0 z-20 backdrop-blur bg-surface/80 border-b border-white/5">
-      <nav class="mx-auto flex max-w-6xl items-center justify-between px-4 sm:px-6 py-3 sm:py-4 gap-2">
-        <div class="flex items-center gap-2 font-bold tracking-tight min-w-0">
-          <span class="h-6 w-6 sm:h-8 sm:w-8 rounded-full bg-white/10 inline-flex items-center justify-center flex-shrink-0 text-xs sm:text-base">T</span>
-          <span class="text-xs sm:text-base truncate">Truong Gia Thanh</span>
-        </div>
-        <ul class="hidden md:flex flex-wrap items-center gap-2 lg:gap-4 text-xs lg:text-sm">
-          {navLinks.map(({ href, label }) => (
-            <li>
-              <a href={href} class="hover:text-white transition-colors" aria-label={label}>
-                {label}
-              </a>
-            </li>
-          ))}
-        </ul>
-        <div class="flex items-center gap-2 lg:gap-3 ml-auto">
-          <form action="/search" class="hidden items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-sm text-secondary focus-within:border-white/30 lg:flex">
-            <span aria-hidden="true">🔍</span>
-            <input
-              name="q"
-              type="search"
-              placeholder="Search"
-              class="w-24 lg:w-36 bg-transparent text-primary placeholder:text-secondary focus:outline-none text-xs lg:text-sm"
-            />
-          </form>
-          <a
-            href="/search"
-            aria-label="Search"
-            class="inline-flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-base sm:text-lg lg:hidden transition-all hover:bg-white/10"
-          >
-            🔍
-          </a>
-          <ThemeSwitcher client:load />
+      <nav class="mx-auto max-w-6xl px-4 sm:px-6 py-3 sm:py-4">
+        <div class="flex items-center justify-between gap-2 sm:gap-4">
+          <!-- Logo -->
+          <div class="flex items-center gap-2 font-bold tracking-tight flex-shrink-0">
+            <span class="h-6 w-6 sm:h-8 sm:w-8 rounded-full bg-white/10 inline-flex items-center justify-center flex-shrink-0 text-xs sm:text-base">T</span>
+            <span class="text-xs sm:text-base truncate">Truong Gia Thanh</span>
+          </div>
+          
+          <!-- Center Nav Links -->
+          <ul class="hidden md:flex flex-wrap items-center justify-center gap-2 lg:gap-6 text-xs lg:text-sm flex-1">
+            {navLinks.map(({ href, label }) => (
+              <li>
+                <a href={href} class="hover:text-white transition-colors" aria-label={label}>
+                  {label}
+                </a>
+              </li>
+            ))}
+          </ul>
+          
+          <!-- Right Side: Search & Theme -->
+          <div class="flex items-center gap-2 lg:gap-3 flex-shrink-0">
+            <form action="/search" class="hidden items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-sm text-secondary focus-within:border-white/30 lg:flex">
+              <span aria-hidden="true">🔍</span>
+              <input
+                name="q"
+                type="search"
+                placeholder="Search"
+                class="w-24 lg:w-36 bg-transparent text-primary placeholder:text-secondary focus:outline-none text-xs lg:text-sm"
+              />
+            </form>
+            <a
+              href="/search"
+              aria-label="Search"
+              class="inline-flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-base sm:text-lg lg:hidden transition-all hover:bg-white/10"
+            >
+              🔍
+            </a>
+            <ThemeSwitcher client:load />
+          </div>
         </div>
       </nav>
     </header>
