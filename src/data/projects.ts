@@ -8,6 +8,13 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    slug: 'reinforcement-learning-mario-project',
+    title: 'Reinforcement Learning Mario Project',
+    date: '2025-12-15',
+    tags: ['machine-learning', 'deep-learning', 'reinforcement-learning', 'python'],
+    summary: 'Deep RL agent that learns to play Super Mario Bros using neural networks and policy gradients.'
+  },
+  {
     slug: 'personal-schedule-assistant',
     title: 'Personal Schedule Assistant',
     date: '2024-12-08',
