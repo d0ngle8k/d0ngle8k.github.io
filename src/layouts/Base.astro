@@ -44,9 +44,9 @@ const navLinks = [
           </div>
           
           <!-- Center Nav Links -->
-          <ul class="hidden md:flex flex-wrap items-center justify-center gap-2 lg:gap-6 text-xs lg:text-sm flex-1">
+          <ul class="hidden md:flex items-center justify-center gap-2 lg:gap-6 text-xs lg:text-sm flex-1 whitespace-nowrap">
             {navLinks.map(({ href, label }) => (
-              <li>
+              <li key={href}>
                 <a href={href} class="hover:text-white transition-colors" aria-label={label}>
                   {label}
                 </a>
