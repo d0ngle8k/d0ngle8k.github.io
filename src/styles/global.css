@@ -1,0 +1,132 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color: #e5e7eb;
+  background-color: transparent; /* Starfield provides dark bg */
+  font-family: 'DM Sans', Inter, system-ui, sans-serif;
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+html.light {
+  color: #1f2937;
+  background-color: #ffffff;
+}
+
+html.light body {
+  background-color: #ffffff !important;
+  color: #111827 !important;
+}
+
+html.light .bg-surface {
+  background-color: #ffffff !important;
+}
+
+html.light .bg-card {
+  background-color: #ffffff !important;
+}
+
+html.light .bg-card\/80,
+html.light .bg-card\/60 {
+  background-color: #ffffff !important;
+}
+
+html.light .text-primary {
+  color: #111827 !important;
+}
+
+html.light .text-secondary {
+  color: #6b7280 !important;
+}
+
+html.light .border-white\/5,
+html.light .border-white\/10,
+html.light .border-white\/20,
+html.light .border-white\/30 {
+  border-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+html.light .bg-white\/5 {
+  background-color: rgba(0, 0, 0, 0.03) !important;
+}
+
+html.light .bg-white\/10 {
+  background-color: rgba(0, 0, 0, 0.05) !important;
+}
+
+html.light .bg-surface\/80 {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+}
+
+html.light .bg-gradient-to-b {
+  background: none !important;
+}
+
+html.light .btn-primary {
+  background-color: #111827 !important;
+  color: #ffffff !important;
+}
+
+html.light .btn-ghost {
+  border-color: rgba(0, 0, 0, 0.2) !important;
+  color: #111827 !important;
+}
+
+html.light .btn-ghost:hover {
+  background-color: rgba(0, 0, 0, 0.05) !important;
+}
+
+html.light .shadow-card {
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1) !important;
+}
+
+html.light header {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+html.light footer {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+body {
+  @apply text-primary min-h-screen antialiased;
+  background-color: transparent; /* Let starfield show through */
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+a {
+  @apply text-primary hover:text-white transition-colors;
+}
+
+html.light a:hover {
+  color: #000000 !important;
+}
+
+.card {
+  @apply bg-card/80 border border-white/5 rounded-2xl shadow-card backdrop-blur-sm;
+  transition: background-color 0.5s ease, border-color 0.5s ease;
+}
+
+.btn-primary {
+  @apply inline-flex items-center justify-center px-4 py-2 rounded-full bg-white text-black font-semibold shadow hover:-translate-y-0.5 transition;
+}
+
+.btn-ghost {
+  @apply inline-flex items-center justify-center px-4 py-2 rounded-full border border-white/20 text-white hover:bg-white/10 transition;
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 0.6s ease-in-out;
+}

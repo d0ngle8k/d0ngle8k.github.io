@@ -1,0 +1,15 @@
+---
+import Base from '../layouts/Base.astro';
+import { SearchBox } from '../components/SearchBox';
+import { posts } from '../data/posts';
+import { projects } from '../data/projects';
+---
+<Base title="Search | Truong Gia Thanh">
+  <section class="mx-auto max-w-4xl px-6 py-16 space-y-8">
+    <div class="space-y-2">
+      <p class="text-xs uppercase tracking-[0.3em] text-secondary">Search</p>
+      <h1 class="text-3xl font-bold">Find content</h1>
+    </div>
+    <SearchBox client:load posts={posts} projects={projects} />
+  </section>
+</Base>
