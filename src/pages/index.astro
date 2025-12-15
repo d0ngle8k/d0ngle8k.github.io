@@ -54,16 +54,18 @@ const recentProjects = projects.slice(0, 3);
     </div>
     <div class="grid gap-4 md:grid-cols-3">
       {recentPosts.map((post) => (
-        <article class="card p-4 space-y-2" key={post.slug}>
-          <div class="text-xs text-secondary">{new Date(post.date).toDateString()}</div>
-          <h3 class="font-semibold text-lg">{post.title}</h3>
-          <p class="text-secondary text-sm">{post.excerpt}</p>
-          <div class="flex flex-wrap gap-2 text-[11px] text-secondary">
-            {post.tags.map((tag) => (
-              <span class="rounded-full border border-white/10 bg-white/5 px-2 py-1" key={tag}>{tag}</span>
-            ))}
-          </div>
-        </article>
+        <a href={`/blog/${post.slug}`} class="block transition-transform hover:scale-105" key={post.slug}>
+          <article class="card p-4 space-y-2 h-full cursor-pointer">
+            <div class="text-xs text-secondary">{new Date(post.date).toDateString()}</div>
+            <h3 class="font-semibold text-lg">{post.title}</h3>
+            <p class="text-secondary text-sm">{post.excerpt}</p>
+            <div class="flex flex-wrap gap-2 text-[11px] text-secondary">
+              {post.tags.map((tag) => (
+                <span class="rounded-full border border-white/10 bg-white/5 px-2 py-1" key={tag}>{tag}</span>
+              ))}
+            </div>
+          </article>
+        </a>
       ))}
     </div>
   </section>
@@ -75,16 +77,18 @@ const recentProjects = projects.slice(0, 3);
     </div>
     <div class="grid gap-4 md:grid-cols-3">
       {recentProjects.map((project) => (
-        <article class="card p-4 space-y-2" key={project.slug}>
-          <div class="text-xs text-secondary">{new Date(project.date).toDateString()}</div>
-          <h3 class="font-semibold text-lg">{project.title}</h3>
-          <p class="text-secondary text-sm">{project.summary}</p>
-          <div class="flex flex-wrap gap-2 text-[11px] text-secondary">
-            {project.tags.map((tag) => (
-              <span class="rounded-full border border-white/10 bg-white/5 px-2 py-1" key={tag}>{tag}</span>
-            ))}
-          </div>
-        </article>
+        <a href={`/projects/${project.slug}`} class="block transition-transform hover:scale-105" key={project.slug}>
+          <article class="card p-4 space-y-2 h-full cursor-pointer">
+            <div class="text-xs text-secondary">{new Date(project.date).toDateString()}</div>
+            <h3 class="font-semibold text-lg">{project.title}</h3>
+            <p class="text-secondary text-sm">{project.summary}</p>
+            <div class="flex flex-wrap gap-2 text-[11px] text-secondary">
+              {project.tags.map((tag) => (
+                <span class="rounded-full border border-white/10 bg-white/5 px-2 py-1" key={tag}>{tag}</span>
+              ))}
+            </div>
+          </article>
+        </a>
       ))}
     </div>
   </section>
