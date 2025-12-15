@@ -8,6 +8,13 @@ export type Post = {
 
 export const posts: Post[] = [
   {
+    slug: 'daily-routine-balance',
+    title: 'My Daily Routine: Balancing Grind with Purpose',
+    date: '2025-12-15',
+    tags: ['lifestyle', 'productivity', 'balance', 'personal-growth'],
+    excerpt: 'LeetCode grind, CTF challenges, aim training, gym sessions, and school. How I structure my day to stay sharp across multiple domains without burning out.'
+  },
+  {
     slug: 'league-of-legends-mastery',
     title: 'How to Be Good at League of Legends',
     date: '2025-12-15',
