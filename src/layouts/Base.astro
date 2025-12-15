@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import { ThemeSwitcher } from '../components/ThemeSwitcher';
 import { Starfield } from '../components/Starfield';
+import { ViewTransitions } from 'astro:transitions';
 
 const { title = 'Portfolio', description = 'Portfolio website' } = Astro.props;
 ---
@@ -12,6 +13,7 @@ const { title = 'Portfolio', description = 'Portfolio website' } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <ViewTransitions />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
     <link
