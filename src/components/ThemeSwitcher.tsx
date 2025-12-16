@@ -1,16 +1,15 @@
 import { useEffect, useState } from 'react';
 
 export function ThemeSwitcher() {
-  const [theme, setTheme] = useState<'dark' | 'light'>('dark');
+  const [theme, setTheme] = useState<'dark' | 'light'>('light');
   const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => {
-    // Check localStorage on mount
+    // Check localStorage on mount, default to 'light' for new users
     const stored = localStorage.getItem('theme') as 'dark' | 'light' | null;
-    if (stored) {
-      setTheme(stored);
-      document.documentElement.classList.toggle('light', stored === 'light');
-    }
+    const themeToUse = stored || 'light';
+    setTheme(themeToUse);
+    document.documentElement.classList.toggle('light', themeToUse === 'light');
   }, []);
 
   const toggleTheme = () => {
