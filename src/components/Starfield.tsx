@@ -116,12 +116,14 @@ export function Starfield() {
 
       const isLight = document.documentElement.classList.contains('light');
       
-      // Clear with theme-appropriate background
-      ctx.fillStyle = isLight ? '#ffffff' : '#000000';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      // Only render stars in dark mode
+      // Clear canvas
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      // Only fill black and render stars/meteors in dark mode
       if (!isLight) {
+        ctx.fillStyle = '#000000';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
         ctx.fillStyle = 'rgba(255,255,255,0.9)';
         stars.forEach((star) => {
           const brightness = 0.5 + Math.random() * 0.5;
