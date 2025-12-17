@@ -124,11 +124,20 @@ const navLinks = [
       </div>
     </footer>
 
-    <a
-      href="#top"
-      class="fixed bottom-6 right-6 rounded-full border border-white/20 bg-card/80 px-3 py-2 text-xs text-primary shadow hover:-translate-y-0.5 transition"
+    <button
+      id="back-to-top"
+      class="fixed bottom-6 right-6 rounded-full border border-white/20 bg-card/80 px-3 py-2 text-xs text-primary shadow hover:-translate-y-0.5 transition cursor-pointer"
     >
       Back to top
-    </a>
+    </button>
+
+    <script>
+      document.getElementById('back-to-top')?.addEventListener('click', () => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+    </script>
   </body>
 </html>
