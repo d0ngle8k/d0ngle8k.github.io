@@ -17,6 +17,11 @@ const detail = blogDetails[slug as keyof typeof blogDetails];
 if (!post || !detail) {
   return new Response('Post not found', { status: 404 });
 }
+
+// Find current index and adjacent posts
+const currentIndex = posts.findIndex((p) => p.slug === slug);
+const prevPost = currentIndex < posts.length - 1 ? posts[currentIndex + 1] : null;
+const nextPost = currentIndex > 0 ? posts[currentIndex - 1] : null;
 ---
 
 <Base title={post.title}>
@@ -44,10 +49,51 @@ if (!post || !detail) {
       ))}
     </div>
 
-    <div class="pt-8 border-t border-white/10">
-      <a href="/blog" class="text-secondary hover:text-white transition text-sm sm:text-base">
-        ← Back to blog
-      </a>
+    <div class="pt-8 border-t border-white/10 space-y-6">
+      <!-- Navigation Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <!-- Previous Post -->
+        {prevPost ? (
+          <a 
+            href={`/blog/${prevPost.slug}`}
+            class="group card p-4 hover:border-white/30 hover:-translate-y-0.5 transition-all"
+          >
+            <div class="text-xs text-secondary mb-2">← Previous</div>
+            <div class="font-semibold text-sm group-hover:text-white transition-colors line-clamp-2">{prevPost.title}</div>
+          </a>
+        ) : (
+          <div class="card p-4 opacity-50">
+            <div class="text-xs text-secondary mb-2">← Previous</div>
+            <div class="text-sm text-secondary">No previous post</div>
+          </div>
+        )}
+        
+        <!-- Next Post -->
+        {nextPost ? (
+          <a 
+            href={`/blog/${nextPost.slug}`}
+            class="group card p-4 hover:border-white/30 hover:-translate-y-0.5 transition-all text-right"
+          >
+            <div class="text-xs text-secondary mb-2">Next →</div>
+            <div class="font-semibold text-sm group-hover:text-white transition-colors line-clamp-2">{nextPost.title}</div>
+          </a>
+        ) : (
+          <div class="card p-4 opacity-50 text-right">
+            <div class="text-xs text-secondary mb-2">Next →</div>
+            <div class="text-sm text-secondary">No next post</div>
+          </div>
+        )}
+      </div>
+
+      <!-- Back to Blog -->
+      <div class="text-center">
+        <a href="/blog" class="inline-flex items-center gap-2 text-secondary hover:text-white transition text-sm">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+          </svg>
+          Back to all posts
+        </a>
+      </div>
     </div>
   </article>
 </Base>
