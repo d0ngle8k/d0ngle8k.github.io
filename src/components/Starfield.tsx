@@ -2,6 +2,24 @@ import { useEffect, useRef } from 'react';
 
 const STAR_COUNT = 120;
 
+type Sparkle = {
+  x: number;
+  y: number;
+  age: number; // ms
+  life: number; // ms
+  maxR: number; // px
+};
+
+type Meteor = {
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+  age: number; // ms
+  life: number; // ms
+  tail: number; // px
+};
+
 function randomStar(width: number, height: number) {
   return {
     x: Math.random() * width,
@@ -21,14 +39,50 @@ export function Starfield() {
 
     let animationFrame: number;
     let stars = Array.from({ length: STAR_COUNT }, () => randomStar(canvas.width, canvas.height));
+    let sparkles: Sparkle[] = [];
+    let meteors: Meteor[] = [];
+    let lastTime = performance.now();
+    let nextSparkleIn = 300 + Math.random() * 600; // ms
+    let nextMeteorIn = 5000 + Math.random() * 3000; // ms
 
     const resize = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
       stars = Array.from({ length: STAR_COUNT }, () => randomStar(canvas.width, canvas.height));
+      // Clear transient effects on resize
+      sparkles = [];
+      meteors = [];
+      nextSparkleIn = 300 + Math.random() * 600;
+      nextMeteorIn = 5000 + Math.random() * 3000;
+      lastTime = performance.now();
+    };
+
+    const spawnSparkle = () => {
+      sparkles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        age: 0,
+        life: 900 + Math.random() * 800,
+        maxR: 1.5 + Math.random() * 2.5
+      });
+    };
+
+    const spawnMeteor = () => {
+      const margin = 80;
+      const startX = Math.random() < 0.5 ? -margin : Math.random() * (canvas.width * 0.35);
+      const startY = Math.random() * (canvas.height * 0.3);
+      const speed = 350 + Math.random() * 250; // px/s
+      const angle = (35 + Math.random() * 20) * (Math.PI / 180);
+      const vx = Math.cos(angle) * speed;
+      const vy = Math.sin(angle) * speed;
+      meteors.push({ x: startX, y: startY, vx, vy, age: 0, life: 1600 + Math.random() * 1200, tail: 90 + Math.random() * 80 });
     };
 
     const render = () => {
+      const now = performance.now();
+      const dt = now - lastTime; // ms
+      lastTime = now;
+
       const isLight = document.documentElement.classList.contains('light');
       
       // Clear with theme-appropriate background
@@ -47,6 +101,91 @@ export function Starfield() {
           star.y += 0.05;
           if (star.y > canvas.height) star.y = 0;
         });
+
+        // Spawn logic
+        nextSparkleIn -= dt;
+        if (nextSparkleIn <= 0) {
+          spawnSparkle();
+          nextSparkleIn = 300 + Math.random() * 600;
+        }
+        nextMeteorIn -= dt;
+        if (nextMeteorIn <= 0 && meteors.length < 1) {
+          spawnMeteor();
+          nextMeteorIn = 5000 + Math.random() * 3000;
+        }
+
+        // Sparkles
+        for (let i = sparkles.length - 1; i >= 0; i--) {
+          const s = sparkles[i];
+          s.age += dt;
+          const t = Math.min(1, s.age / s.life);
+          // Smooth sine wave for dramatic pulsing blink
+          const pulse = 0.3 + Math.sin(t * Math.PI * 8) * 0.35 + (1 - Math.abs(0.5 - t) * 2) * 0.35;
+          const r = 0.5 + pulse * s.maxR;
+          // Higher alpha for shinier effect
+          const alpha = 0.4 + pulse * 0.6;
+
+          // Outer glow layer (larger radius, dimmer)
+          const glowGrad = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, r * 5);
+          glowGrad.addColorStop(0, `rgba(255,255,255,${alpha * 0.5})`);
+          glowGrad.addColorStop(0.5, `rgba(255,255,255,${alpha * 0.15})`);
+          glowGrad.addColorStop(1, 'rgba(255,255,255,0)');
+          ctx.fillStyle = glowGrad;
+          ctx.beginPath();
+          ctx.arc(s.x, s.y, r * 5, 0, Math.PI * 2);
+          ctx.fill();
+
+          // Core bright layer
+          const coreGrad = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, r * 2);
+          coreGrad.addColorStop(0, `rgba(255,255,255,${alpha})`);
+          coreGrad.addColorStop(0.5, `rgba(255,255,255,${alpha * 0.4})`);
+          coreGrad.addColorStop(1, 'rgba(255,255,255,0)');
+          ctx.fillStyle = coreGrad;
+          ctx.beginPath();
+          ctx.arc(s.x, s.y, r * 2, 0, Math.PI * 2);
+          ctx.fill();
+
+          if (s.age >= s.life) sparkles.splice(i, 1);
+        }
+
+        // Meteors
+        for (let i = meteors.length - 1; i >= 0; i--) {
+          const m = meteors[i];
+          m.age += dt;
+          const secs = dt / 1000;
+          m.x += m.vx * secs;
+          m.y += m.vy * secs;
+
+          const t = Math.min(1, m.age / m.life);
+          const alpha = (1 - t) * 0.9;
+          const tailLen = m.tail * (1 - t * 0.4);
+          const len = Math.hypot(m.vx, m.vy) || 1;
+          const ux = (m.vx / len) * tailLen;
+          const uy = (m.vy / len) * tailLen;
+          const x2 = m.x - ux;
+          const y2 = m.y - uy;
+
+          const g = ctx.createLinearGradient(x2, y2, m.x, m.y);
+          g.addColorStop(0, 'rgba(255,255,255,0)');
+          g.addColorStop(0.6, `rgba(255,255,255,${alpha * 0.35})`);
+          g.addColorStop(1, `rgba(255,255,255,${alpha})`);
+
+          ctx.save();
+          ctx.strokeStyle = g;
+          ctx.lineWidth = 2;
+          ctx.lineCap = 'round';
+          ctx.shadowColor = 'rgba(255,255,255,0.9)';
+          ctx.shadowBlur = 10;
+          ctx.beginPath();
+          ctx.moveTo(x2, y2);
+          ctx.lineTo(m.x, m.y);
+          ctx.stroke();
+          ctx.restore();
+
+          if (m.age >= m.life || m.x > canvas.width + 120 || m.y > canvas.height + 120) {
+            meteors.splice(i, 1);
+          }
+        }
       }
 
       animationFrame = requestAnimationFrame(render);
