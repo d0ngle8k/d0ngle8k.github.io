@@ -15,7 +15,7 @@ export function MobileNav({ links }: Props) {
       {/* Hamburger Button */}
       <button
         onClick={toggleMenu}
-        className="inline-flex items-center justify-center h-9 w-9 rounded-full border border-white/10 bg-white/5 text-white hover:bg-white/10 transition-all"
+        className="inline-flex items-center justify-center h-9 w-9 rounded-full border border-white/10 bg-white/5 text-primary hover:bg-white/10 transition-all"
         aria-label="Toggle menu"
         aria-expanded={isOpen}
       >
@@ -45,7 +45,7 @@ export function MobileNav({ links }: Props) {
 
       {/* Dropdown Menu with smooth animation */}
       <div
-        className={`absolute top-full right-0 mt-2 w-48 bg-surface/95 backdrop-blur border border-white/10 rounded-lg shadow-lg overflow-hidden transition-all duration-300 origin-top-right ${
+        className={`absolute top-full right-0 mt-2 w-56 card rounded-lg p-0 overflow-hidden transition-all duration-300 origin-top-right ${
           isOpen
             ? 'opacity-100 scale-100 visible'
             : 'opacity-0 scale-95 invisible'

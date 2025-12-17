@@ -31,7 +31,7 @@ export function WorkExperience({ workHistory }: Props) {
       {visibleItems.map((job, index) => (
         <article
           key={`${job.role}-${job.company}`}
-          className="card p-4 sm:p-6 space-y-3 transition-all duration-300 hover:border-white/30 hover:shadow-lg hover:-translate-y-1 cursor-pointer group"
+          className="card p-4 sm:p-6 space-y-3 transition-all duration-300 hover:border-white/30 hover:shadow-lg hover:-translate-y-1 cursor-pointer group work-card"
           style={{
             // Staggered animation: each item delays by 80ms for cascade effect
             animation: `fadeInUp 0.5s ease-out ${index * 0.08}s both`
@@ -64,17 +64,17 @@ export function WorkExperience({ workHistory }: Props) {
             <span className="hidden sm:block">•</span>
             
             {/* Company */}
-            <span className="group-hover:text-white transition-colors">{job.company}</span>
+            <span className="hover-text-accent transition-colors">{job.company}</span>
             <span className="hidden sm:block">•</span>
             
             {/* Timeline */}
-            <span className="group-hover:text-white transition-colors text-xs sm:text-sm">
+            <span className="hover-text-accent transition-colors text-xs sm:text-sm">
               {job.start} — {job.end ?? 'Present'}
             </span>
           </div>
 
           {/* Summary - Main description */}
-          <p className="text-secondary text-sm sm:text-base group-hover:text-white/80 transition-colors">
+          <p className="text-secondary text-sm sm:text-base hover-text-muted transition-colors">
             {job.summary}
           </p>
 
@@ -88,7 +88,7 @@ export function WorkExperience({ workHistory }: Props) {
           >
             <ul className="list-disc space-y-1 sm:space-y-2 pl-5 text-secondary text-xs sm:text-sm">
               {job.bullets.map((item) => (
-                <li key={item} className="group-hover:text-white/70 transition-colors">
+                <li key={item} className="hover-text-muted transition-colors">
                   {item}
                 </li>
               ))}
@@ -98,7 +98,7 @@ export function WorkExperience({ workHistory }: Props) {
           {/* Expand/Collapse Indicator */}
           <div className="flex items-center justify-end pt-2">
             <span
-              className="text-secondary group-hover:text-white group-hover:translate-x-1 transition-all text-lg"
+              className="text-secondary hover-text-accent group-hover:translate-x-1 transition-all text-lg"
               aria-hidden="true"
             >
               {expandedRole === `${job.role}-${job.company}` ? '↑' : '↓'}
