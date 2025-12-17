@@ -69,13 +69,44 @@ export function Starfield() {
 
     const spawnMeteor = () => {
       const margin = 80;
-      const startX = Math.random() < 0.5 ? -margin : Math.random() * (canvas.width * 0.35);
-      const startY = Math.random() * (canvas.height * 0.3);
-      const speed = 350 + Math.random() * 250; // px/s
-      const angle = (35 + Math.random() * 20) * (Math.PI / 180);
+      const direction = Math.random();
+      let startX, startY, angle;
+      
+      // Random entry from all 4 edges
+      if (direction < 0.25) {
+        // Top-left to bottom-right
+        startX = -margin;
+        startY = Math.random() * (canvas.height * 0.4);
+        angle = (30 + Math.random() * 30) * (Math.PI / 180);
+      } else if (direction < 0.5) {
+        // Top-right to bottom-left
+        startX = canvas.width + margin;
+        startY = Math.random() * (canvas.height * 0.4);
+        angle = (150 + Math.random() * 30) * (Math.PI / 180);
+      } else if (direction < 0.75) {
+        // Bottom-left to top-right
+        startX = Math.random() * (canvas.width * 0.4);
+        startY = canvas.height + margin;
+        angle = (-60 + Math.random() * 30) * (Math.PI / 180);
+      } else {
+        // Bottom-right to top-left
+        startX = canvas.width + margin;
+        startY = canvas.height + margin;
+        angle = (210 + Math.random() * 30) * (Math.PI / 180);
+      }
+      
+      const speed = 350 + Math.random() * 250;
       const vx = Math.cos(angle) * speed;
       const vy = Math.sin(angle) * speed;
-      meteors.push({ x: startX, y: startY, vx, vy, age: 0, life: 1600 + Math.random() * 1200, tail: 90 + Math.random() * 80 });
+      meteors.push({
+        x: startX,
+        y: startY,
+        vx,
+        vy,
+        age: 0,
+        life: 1600 + Math.random() * 1200,
+        tail: 90 + Math.random() * 80
+      });
     };
 
     const render = () => {
@@ -109,9 +140,9 @@ export function Starfield() {
           nextSparkleIn = 300 + Math.random() * 600;
         }
         nextMeteorIn -= dt;
-        if (nextMeteorIn <= 0 && meteors.length < 1) {
+        if (nextMeteorIn <= 0 && meteors.length < 50) {
           spawnMeteor();
-          nextMeteorIn = 5000 + Math.random() * 3000;
+          nextMeteorIn = 1000;
         }
 
         // Sparkles
