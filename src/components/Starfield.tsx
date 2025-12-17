@@ -49,7 +49,7 @@ export function Starfield() {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
       stars = Array.from({ length: STAR_COUNT }, () => randomStar(canvas.width, canvas.height));
-      // Clear transient effects on resize to avoid odd artifacts
+      // Clear transient effects on resize
       sparkles = [];
       meteors = [];
       nextSparkleIn = 300 + Math.random() * 600;
@@ -147,7 +147,7 @@ export function Starfield() {
           nextMeteorIn = 1000;
         }
 
-        // Render sparkles (twinkling big star)
+        // Sparkles
         for (let i = sparkles.length - 1; i >= 0; i--) {
           const s = sparkles[i];
           s.age += dt;
@@ -178,11 +178,10 @@ export function Starfield() {
           ctx.arc(s.x, s.y, r * 2, 0, Math.PI * 2);
           ctx.fill();
 
-          // Remove finished
           if (s.age >= s.life) sparkles.splice(i, 1);
         }
 
-        // Render meteors
+        // Meteors
         for (let i = meteors.length - 1; i >= 0; i--) {
           const m = meteors[i];
           m.age += dt;
@@ -193,11 +192,9 @@ export function Starfield() {
           const t = Math.min(1, m.age / m.life);
           const alpha = (1 - t) * 0.9;
           const tailLen = m.tail * (1 - t * 0.4);
-          const nx = m.vx;
-          const ny = m.vy;
-          const len = Math.hypot(nx, ny) || 1;
-          const ux = (nx / len) * tailLen;
-          const uy = (ny / len) * tailLen;
+          const len = Math.hypot(m.vx, m.vy) || 1;
+          const ux = (m.vx / len) * tailLen;
+          const uy = (m.vy / len) * tailLen;
           const x2 = m.x - ux;
           const y2 = m.y - uy;
 
@@ -218,7 +215,6 @@ export function Starfield() {
           ctx.stroke();
           ctx.restore();
 
-          // Remove finished or out of bounds
           if (m.age >= m.life || m.x > canvas.width + 120 || m.y > canvas.height + 120) {
             meteors.splice(i, 1);
           }
