@@ -68,12 +68,34 @@ export function Starfield() {
     };
 
     const spawnMeteor = () => {
-      // Enter from top-left quadrant, travel diagonally to bottom-right
       const margin = 80;
-      const startX = Math.random() < 0.5 ? -margin : Math.random() * (canvas.width * 0.35);
-      const startY = Math.random() * (canvas.height * 0.3);
-      const speed = 350 + Math.random() * 250; // px/s
-      const angle = (35 + Math.random() * 20) * (Math.PI / 180); // 35-55 degrees
+      const direction = Math.random();
+      let startX, startY, angle;
+      
+      // Random entry from all 4 edges
+      if (direction < 0.25) {
+        // Top-left to bottom-right
+        startX = -margin;
+        startY = Math.random() * (canvas.height * 0.4);
+        angle = (30 + Math.random() * 30) * (Math.PI / 180);
+      } else if (direction < 0.5) {
+        // Top-right to bottom-left
+        startX = canvas.width + margin;
+        startY = Math.random() * (canvas.height * 0.4);
+        angle = (150 + Math.random() * 30) * (Math.PI / 180);
+      } else if (direction < 0.75) {
+        // Bottom-left to top-right
+        startX = Math.random() * (canvas.width * 0.4);
+        startY = canvas.height + margin;
+        angle = (-60 + Math.random() * 30) * (Math.PI / 180);
+      } else {
+        // Bottom-right to top-left
+        startX = canvas.width + margin;
+        startY = canvas.height + margin;
+        angle = (210 + Math.random() * 30) * (Math.PI / 180);
+      }
+      
+      const speed = 350 + Math.random() * 250;
       const vx = Math.cos(angle) * speed;
       const vy = Math.sin(angle) * speed;
       meteors.push({
@@ -94,12 +116,14 @@ export function Starfield() {
 
       const isLight = document.documentElement.classList.contains('light');
       
-      // Clear with theme-appropriate background
-      ctx.fillStyle = isLight ? '#ffffff' : '#000000';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      // Only render stars in dark mode
+      // Clear canvas
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      // Only fill black and render stars/meteors in dark mode
       if (!isLight) {
+        ctx.fillStyle = '#000000';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
         ctx.fillStyle = 'rgba(255,255,255,0.9)';
         stars.forEach((star) => {
           const brightness = 0.5 + Math.random() * 0.5;
@@ -118,9 +142,9 @@ export function Starfield() {
           nextSparkleIn = 300 + Math.random() * 600;
         }
         nextMeteorIn -= dt;
-        if (nextMeteorIn <= 0 && meteors.length < 1) {
+        if (nextMeteorIn <= 0 && meteors.length < 50) {
           spawnMeteor();
-          nextMeteorIn = 5000 + Math.random() * 3000;
+          nextMeteorIn = 1000;
         }
 
         // Render sparkles (twinkling big star)
