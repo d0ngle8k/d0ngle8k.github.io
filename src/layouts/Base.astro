@@ -11,8 +11,7 @@ const navLinks = [
   { href: '/', label: 'Home' },
   { href: '/work', label: 'Work' },
   { href: '/blog', label: 'Blog' },
-  { href: '/projects', label: 'Projects' },
-  { href: '/playground', label: 'Playground' }
+  { href: '/projects', label: 'Projects' }
 ];
 ---
 <!DOCTYPE html>
@@ -24,7 +23,7 @@ const navLinks = [
     <meta name="description" content={description} />
     <ViewTransitions />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
     <link
       href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap"
       rel="stylesheet"
@@ -47,7 +46,7 @@ const navLinks = [
           <!-- Center Nav Links -->
           <ul class="hidden md:flex items-center justify-center gap-2 lg:gap-6 text-xs lg:text-sm flex-1 whitespace-nowrap">
             {navLinks.map(({ href, label }) => (
-              <li key={href}>
+              <li>
                 <a href={href} class="hover:text-white transition-colors" aria-label={label}>
                   {label}
                 </a>
@@ -131,13 +130,24 @@ const navLinks = [
       Back to top
     </button>
 
-    <script>
-      document.getElementById('back-to-top')?.addEventListener('click', () => {
-        window.scrollTo({
-          top: 0,
-          behavior: 'smooth'
-        });
-      });
+    <script is:inline>
+      function setupBackToTop() {
+        const btn = document.getElementById('back-to-top');
+        if (btn) {
+          btn.onclick = () => {
+            window.scrollTo({
+              top: 0,
+              behavior: 'smooth'
+            });
+          };
+        }
+      }
+
+      // Run on initial page load
+      setupBackToTop();
+
+      // Re-run after view transitions
+      document.addEventListener('astro:after-swap', setupBackToTop);
     </script>
   </body>
 </html>
