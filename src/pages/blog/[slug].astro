@@ -18,10 +18,12 @@ if (!post || !detail) {
   return new Response('Post not found', { status: 404 });
 }
 
-// Find current index and adjacent posts
+// Find current index and adjacent posts (circular navigation)
+// Posts array is ordered: newest (index 0) -> oldest (index last)
+// prevPost = older blog (higher index), nextPost = newer blog (lower index)
 const currentIndex = posts.findIndex((p) => p.slug === slug);
-const prevPost = currentIndex < posts.length - 1 ? posts[currentIndex + 1] : null;
-const nextPost = currentIndex > 0 ? posts[currentIndex - 1] : null;
+const prevPost = currentIndex < posts.length - 1 ? posts[currentIndex + 1] : posts[0];
+const nextPost = currentIndex > 0 ? posts[currentIndex - 1] : posts[posts.length - 1];
 ---
 
 <Base title={post.title}>
@@ -53,36 +55,22 @@ const nextPost = currentIndex > 0 ? posts[currentIndex - 1] : null;
       <!-- Navigation Grid -->
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <!-- Previous Post -->
-        {prevPost ? (
-          <a 
-            href={`/blog/${prevPost.slug}`}
-            class="group card p-4 hover:border-white/30 hover:-translate-y-0.5 transition-all"
-          >
-            <div class="text-xs text-secondary mb-2">← Previous</div>
-            <div class="font-semibold text-sm group-hover:text-white transition-colors line-clamp-2">{prevPost.title}</div>
-          </a>
-        ) : (
-          <div class="card p-4 opacity-50">
-            <div class="text-xs text-secondary mb-2">← Previous</div>
-            <div class="text-sm text-secondary">No previous post</div>
-          </div>
-        )}
+        <a 
+          href={`/blog/${prevPost.slug}`}
+          class="group card p-4 hover:border-white/30 hover:-translate-y-0.5 transition-all"
+        >
+          <div class="text-xs text-secondary mb-2">← Previous</div>
+          <div class="font-semibold text-sm group-hover:text-white transition-colors line-clamp-2">{prevPost.title}</div>
+        </a>
         
         <!-- Next Post -->
-        {nextPost ? (
-          <a 
-            href={`/blog/${nextPost.slug}`}
-            class="group card p-4 hover:border-white/30 hover:-translate-y-0.5 transition-all text-right"
-          >
-            <div class="text-xs text-secondary mb-2">Next →</div>
-            <div class="font-semibold text-sm group-hover:text-white transition-colors line-clamp-2">{nextPost.title}</div>
-          </a>
-        ) : (
-          <div class="card p-4 opacity-50 text-right">
-            <div class="text-xs text-secondary mb-2">Next →</div>
-            <div class="text-sm text-secondary">No next post</div>
-          </div>
-        )}
+        <a 
+          href={`/blog/${nextPost.slug}`}
+          class="group card p-4 hover:border-white/30 hover:-translate-y-0.5 transition-all text-right"
+        >
+          <div class="text-xs text-secondary mb-2">Next →</div>
+          <div class="font-semibold text-sm group-hover:text-white transition-colors line-clamp-2">{nextPost.title}</div>
+        </a>
       </div>
 
       <!-- Back to Blog -->
