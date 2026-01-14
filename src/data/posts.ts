@@ -8,6 +8,13 @@ export type Post = {
 
 export const posts: Post[] = [
   {
+    slug: 'first-half-2026-plan',
+    title: 'Nửa Đầu Năm 2026 và Kế Hoạch Của Mình',
+    date: '2026-01-14',
+    tags: ['goals', 'learning', 'mathematics', 'career', 'self-improvement'],
+    excerpt: 'Học lại toàn bộ toán từ đầu, làm chủ nền tảng, và tìm việc Software Engineer hoặc SOC Analyst. Tại sao toán là nền tảng của mọi thứ.'
+  },
+  {
     slug: 'daily-routine-balance',
     title: 'My Daily Routine: Balancing Grind with Purpose',
     date: '2025-12-15',

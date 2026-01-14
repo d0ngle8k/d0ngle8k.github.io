@@ -1,4 +1,62 @@
 export const blogDetails = {
+  'first-half-2026-plan': {
+    sections: [
+      {
+        title: 'Tại Sao Học Lại Toán',
+        content: [
+          "Toán là nền tảng của tư duy. Lập trình chỉ là công cụ để viết ra tư duy trên máy.",
+          "Mình đã code nhiều năm nhưng nhận ra đang thiếu nền tảng. Năm nay mình sẽ học lại từ đầu."
+        ]
+      },
+      {
+        title: 'Mục Tiêu 2026',
+        content: [
+          "Land a job: Software Engineer hoặc SOC Analyst",
+          "Daily learning:",
+          "Hacking - TryHackMe",
+          "Coding - LeetCode",
+          "Math - YouTube (Eureka! Uni)",
+          "Ôn lại cơ sở dữ liệu"
+        ]
+      },
+      {
+        title: 'Hành Trình Ôn Lại Căn Bản',
+        content: [
+          "Từ toán, code đến security - tất cả đều có nền tảng toán học.",
+          "Lộ trình học:",
+          "Giải Tích 1 và 2",
+          "Đại Số Tuyến Tính",
+          "Xác Suất & Thống Kê",
+          "Toán Rời Rạc",
+          "Data Structures & Algorithms"
+        ]
+      },
+      {
+        title: 'Tài Nguyên Học Tập',
+        content: [
+          "DSA Full Course: https://www.youtube.com/watch?v=xwI5OBEnsZU&t=1605s",
+          "Math - Eureka! Uni: https://www.youtube.com/@EurekaUni"
+        ]
+      },
+      {
+        title: 'Tại Sao Cách Này Hiệu Quả',
+        content: [
+          "Học thuộc patterns thì sẽ stuck khi gặp vấn đề mới.",
+          "Hiểu nền tảng toán học thì có thể suy luận và giải quyết bất kỳ vấn đề gì.",
+          "Toán và logic là cốt lõi. Lập trình chỉ là công cụ thực hiện."
+        ]
+      },
+      {
+        title: 'Kế Hoạch 6 Tháng',
+        content: [
+          "Không phải sprint để pass phỏng vấn. Đây là đầu tư dài hạn.",
+          "Luyện tập hàng ngày: Hacking, Coding, Math",
+          "Xây nền tảng vững chắc cho cả sự nghiệp, không chỉ cho một job.",
+          "Fundamentals không bao giờ thay đổi. Frameworks và ngôn ngữ thì có."
+        ]
+      }
+    ]
+  },
   'daily-routine-balance': {
     sections: [
       {
